@@ -8,4 +8,8 @@ Vi har ikke helt bestemt om det skal være en mobil-app eller nettside, men det 
 Haakon
 Dette er en endring i filen
 
+<<<<<<< HEAD
 HALLA DETTE ER OSCAR
+=======
+Ingrid
+>>>>>>> 589fa512857ef95aeb69488a73c37e6049ca1496
