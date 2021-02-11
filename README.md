@@ -7,3 +7,4 @@ Vi har ikke helt bestemt om det skal være en mobil-app eller nettside, men det 
 
 Haakon
 Dette er en endring i filen
+Anna
