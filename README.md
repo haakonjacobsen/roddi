@@ -6,4 +6,4 @@ Det hadde også vært kult og man kunne legge inn kommentarer på eiendelene, me
 Vi har ikke helt bestemt om det skal være en mobil-app eller nettside, men det er viktig med et godt  design.
 
 Haakon
-
+Dette er en endring i filen
