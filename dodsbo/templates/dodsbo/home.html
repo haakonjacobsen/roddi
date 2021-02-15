@@ -1,0 +1,11 @@
+{% extends "dodsbo/base.html" %}
+
+{% block content %}
+    {% for asset in assets %}
+    <div class="asset">
+        <h1>{{ asset.title }}</h1>
+        <h2>{{ asset.value }}</h2>
+        <p>{{ asset.description }}</p>
+    </div>
+    {% endfor %}
+{% endblock content %}
