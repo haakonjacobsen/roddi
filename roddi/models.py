@@ -10,7 +10,7 @@ class User(AbstractBaseUser):
 	objects = UserManager()
 
 	user_name = models.TextField(
-		verbose_name='User Name',
+		verbose_name='User name',
 		max_length=50,
 		unique=True,
 	)
