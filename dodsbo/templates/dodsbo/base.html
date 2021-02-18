@@ -27,6 +27,13 @@
             <a href="#"><h2>Fullført</h2></a>
         </div>
     </header>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}"> 
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     {% block content %} {% endblock %}
 </body>
 </html>

@@ -10,9 +10,9 @@ DISCARD = "discard"
 
 assets = [
     {
-        TITTEL: 'Stol',
-        VALUE: 50,
-        BESKRIVELSE: " Dette er en beskrivelse av en stol.",
+        "title": 'Stol',
+        "value": 50,
+        "description": " Dette er en beskrivelse av en stol.",
         "votes": {
             FORDEL: 1,
             DONATE: 1,
