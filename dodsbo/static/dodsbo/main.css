@@ -1,0 +1,136 @@
+* {
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  margin: 0;
+}
+body {
+  width: 100vw;
+  margin: 0;
+}
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+svg:hover {
+  fill: #fcf8e8;
+  cursor: pointer;
+}
+#profile-container {
+  width: 70px;
+}
+#logo {
+  position: relative;
+  margin: auto;
+  font-family: "Josefin Slab";
+  font-size: 3em;
+  color: #4b4b4b;
+}
+#logo:hover {
+  color: #df7861;
+  cursor: pointer;
+}
+.header {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #d4e2d4;
+  min-height: 120px;
+  max-height: 120px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.25);
+}
+.nav-panel {
+  display: flex;
+  height: 100%;
+}
+.nav-panel h2 {
+  margin-left: 20px;
+  font-weight: 400;
+  color: #4b4b4b;
+}
+.nav-panel h2:hover {
+  color: #df7861;
+  cursor: pointer;
+}
+
+.asset-grid {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+.asset {
+  border: solid 1px black;
+  border-radius: 8px;
+  background-color: #fffdf6;
+  min-height: 300px;
+  min-width: 350px;
+  max-width: 350px;
+  max-height: 300px;
+  margin: 20px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.asset-header {
+  background-color: #fcf8e8;
+  margin: 0;
+  border-radius: 10px 10px 0px 0px;
+  -webkit-box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+.asset-header {
+  background-color: #fcf8e8;
+  margin: 0;
+  border-radius: 10px 10px 0px 0px;
+  -webkit-box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+  padding: 7px;
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+}
+.asset-header h3 {
+  font-size: 2em;
+  font-weight: 400;
+}
+.asset-description {
+  padding: 10px;
+  flex: 4;
+  overflow-x: scroll;
+}
+.asset-vote-panel {
+  flex: 2;
+  width: 100%;
+  border-radius: 0px 0px 10px 10px;
+  height: 30%;
+  display: flex;
+  align-self: flex-end;
+  background-color: #fcfcfc;
+  -webkit-box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+  position: relative;
+  bottom: 0;
+}
+.asset-vote-button {
+  border: #4b4b4b solid 1px;
+  background-color: rgb(160, 7, 7);
+}
+.asset-vote-discard {
+  display: flex;
+}
