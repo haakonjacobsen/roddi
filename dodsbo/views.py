@@ -1,5 +1,10 @@
 from django.shortcuts import render    # Hjelper med å laste inn HTML filer
 from django.http import HttpResponse
+from .models import Estate
+from .models import Item
+from .models import Comment
+from .models import Wish
+from .models import Participate
 
 TITTEL = "title"
 VALUE = "value"
@@ -55,7 +60,7 @@ assets = [
 def home(request):    # Denne funksjonen returnerer hjemmesiden
     context = {
         # gjenstand funker som nøkkel til kodeblokken i home.html
-        'assets': assets
+        'assets': Item.objects.all()
     }
     return render(request, 'dodsbo/home.html', context)
 
