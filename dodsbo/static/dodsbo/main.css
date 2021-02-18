@@ -1,3 +1,4 @@
+/* General */
 * {
   font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -23,24 +24,7 @@ a:active {
   text-decoration: none;
 }
 
-svg:hover {
-  fill: #fcf8e8;
-  cursor: pointer;
-}
-#profile-container {
-  width: 70px;
-}
-#logo {
-  position: relative;
-  margin: auto;
-  font-family: "Josefin Slab";
-  font-size: 3em;
-  color: #4b4b4b;
-}
-#logo:hover {
-  color: #df7861;
-  cursor: pointer;
-}
+/*Header*/
 .header {
   box-sizing: border-box;
   width: 100%;
@@ -66,7 +50,26 @@ svg:hover {
   color: #df7861;
   cursor: pointer;
 }
+#profile-icon:hover svg {
+  fill: #fcf8e8;
+  cursor: pointer;
+}
+#profile-container {
+  width: 70px;
+}
+#logo {
+  position: relative;
+  margin: auto;
+  font-family: "Josefin Slab";
+  font-size: 3em;
+  color: #4b4b4b;
+}
+#logo:hover {
+  color: #df7861;
+  cursor: pointer;
+}
 
+/* Asset */
 .asset-grid {
   display: flex;
   justify-content: space-evenly;
@@ -112,7 +115,7 @@ svg:hover {
 .asset-description {
   padding: 10px;
   flex: 4;
-  overflow-x: scroll;
+  overflow-y: auto;
 }
 .asset-vote-panel {
   flex: 2;
@@ -128,9 +131,20 @@ svg:hover {
   bottom: 0;
 }
 .asset-vote-button {
-  border: #4b4b4b solid 1px;
-  background-color: rgb(160, 7, 7);
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
 .asset-vote-discard {
   display: flex;
+  border-radius: 0px 0px 8px 0px;
+}
+.asset-vote-share {
+  border-radius: 0px 0px 0px 8px;
+}
+.asset-vote-count {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
 }

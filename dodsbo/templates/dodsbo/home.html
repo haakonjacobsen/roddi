@@ -12,17 +12,17 @@
                 <p>{{ asset.description }}</p>
             </div>
             <div class="asset-vote-panel">
-                <div class="asset-vote-button asset-vote-share">
-                    <h5>{{ asset.votes.share }}</h5>
-                    <h4>Fordel</h4>
+                <div class="asset-vote-button asset-vote-share">   
+                    <h4>Fordel</h4>                     
+                    <h5 class="asset-vote-count">{{ asset.votes.share }}</h5>
                 </div>
                 <div class="asset-vote-button asset-vote-donate">
-                    <h5>{{ asset.votes.donate }}</h5>
                     <h4>Doner</h4>
+                    <h5 class="asset-vote-count">{{ asset.votes.donate }}</h5>
                 </div>
                 <div class="asset-vote-button asset-vote-discard">
-                    <h5>{{ asset.votes.discard }}</h5>
                     <h4>Kast</h4>
+                    <h5 class="asset-vote-count">{{ asset.votes.discard }}</h5>
                 </div>
             </div>
         </div>
