@@ -122,3 +122,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'dodsbo-home'
+# Brukes for å si hvor django skal gå når man prøver å gå på profile uten å være logget inn
+LOGIN_URL = 'login'
