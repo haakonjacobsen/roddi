@@ -22,9 +22,21 @@ def register(request):
 @login_required  # Krever at man må være logget inn for å aksessere siden
 def profile(request):
     current_user = request.user
-    estate = Participate.objects.filter(username=current_user).first().estateID
+    participate_list = list(Participate.objects.filter(username=current_user))
+    estates = []
+    for participate in participate_list:
+        estate = participate.estateID
+        print(estate)
+        part_memb_list = list(Participate.objects.filter(estateID=estate))
+        estate_members = []
+        for par in part_memb_list:
+            estate_members.append(par.username)
+        estates.append([estate, estate_members])
+    for i in range(0, len(estates), 2):
+        print(estates[i])
     context = {
         # gjenstand funker som nøkkel til kodeblokken i home.html
-        'assets': Item.objects.filter(estateID=estate).all()
+        'estates': estates
+
     }
     return render(request, 'users/profile.html', context)
