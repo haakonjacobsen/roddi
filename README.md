@@ -5,18 +5,8 @@ Admin-teamet i Røddi går igjennom leiligheten til den som er gått bort og log
 Det hadde også vært kult og man kunne legge inn kommentarer på eiendelene, men da må det i så  fall være mulig å moderere kommentarene for administratorer og eiere av Røddi.  
 Vi har ikke helt bestemt om det skal være en mobil-app eller nettside, men det er viktig med et godt  design.
 
-Haakon
-Dette er en endring i filen
-
-
-
-
-
-HALLA DETTE ER OSCAR
-
-Ingrid 2
-Anna
-
-Brage
-
-Anna del 3
+Til mySQL databasen
+Må skrive følgende i terminalen:
+py -m pip install django-crispy-forms    (python3 for mac ikke py)
+Får å opprette første admin:
+py manage.py createsuperuser
