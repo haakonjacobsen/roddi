@@ -17,6 +17,7 @@
     </div>
     <div class="estate-list">
         <h1 class="estate-list-header">Mine Arveoppgjør:</h1>
+        {% if estates|length > 0%}
         {% for estate in estates %}
         <div class="estate">
             <div class="estate-header">
@@ -33,6 +34,11 @@
             </div>
         </div>
         {% endfor %}
+        {% else %}
+        <div>
+            <h2 style="margin: 20px; font-weight: 200;">Du er ikke registrert i noen arveoppgjør</h2>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock content %}
