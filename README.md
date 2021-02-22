@@ -5,8 +5,15 @@ Admin-teamet i Røddi går igjennom leiligheten til den som er gått bort og log
 Det hadde også vært kult og man kunne legge inn kommentarer på eiendelene, men da må det i så  fall være mulig å moderere kommentarene for administratorer og eiere av Røddi.  
 Vi har ikke helt bestemt om det skal være en mobil-app eller nettside, men det er viktig med et godt  design.
 
-Til mySQL databasen
-Må skrive følgende i terminalen:
+Opprette databsen og connection til django:
+følg nedlastingsunstruksjoner som ligget i Databasefaget. Opprett en database med navn roddi, gjennom workbench eller i terminal. (workbench: CREATE DATABASE roddi;)
+Bruk disse kommandoene i terminalen:
+py -m pip install mysqlclient
+py manage.py makemigrations
+py manage.py migrate 
+
+Til mySQL databasen første gang:
+Må skrive følgende i terminalen;
 py -m pip install django-crispy-forms    (python3 for mac ikke py)
-Får å opprette første admin:
+Får å opprette første admin;
 py manage.py createsuperuser
