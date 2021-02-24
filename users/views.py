@@ -26,17 +26,32 @@ def profile(request):
     estates = []
     for participate in participate_list:
         estate = participate.estateID
-        print(estate)
         part_memb_list = list(Participate.objects.filter(estateID=estate))
         estate_members = []
         for par in part_memb_list:
             estate_members.append(par.username)
         estates.append([estate, estate_members])
-    for i in range(0, len(estates), 2):
-        print(estates[i])
     context = {
         # gjenstand funker som nøkkel til kodeblokken i home.html
         'estates': estates
 
     }
     return render(request, 'users/profile.html', context)
+
+
+@login_required
+def items(request):
+    current_user = request.user
+    items = list(Item.objects.all())
+    estates = []
+    for par in Participate.objects.all():
+        if par.username == current_user:
+            estates.append(par.estateID)
+    user_items = []
+    for item in items:
+        if item.estateID in estates:
+            user_items.append(item)
+    context = {
+        'assets': user_items
+    }
+    return render(request, 'users/items.html', context)

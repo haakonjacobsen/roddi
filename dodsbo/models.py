@@ -6,9 +6,6 @@ from django.contrib.auth.models import User
 class Estate(models.Model):
     name = models.CharField(max_length=100)
 
-    def __self__(self):
-        return (self.estateID, name)
-
 
 class Item(models.Model):
     name = models.CharField(max_length=100)
