@@ -1,0 +1,12 @@
+{% extends "dodsbo/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="home-content">
+</div>
+{% if user.is_authenticated %}
+<h2 class="home-title">Dette er hjemmesiden!</h2>
+{% else %}
+<h2 class="home-title">Velkommen til Røddi!<br> <br> Logg inn eller registrer deg</h2>
+{% endif %}
+{% endblock content %}

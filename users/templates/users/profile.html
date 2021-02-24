@@ -1,0 +1,44 @@
+{% extends "dodsbo/base.html" %}
+{% block content %}
+<div class="profile-content">
+    <div class="profile-info-bar">
+        {% if user.is_staff %}
+        <div class="profile-userinfo"><a class="profile-admin" href="{% url 'admin:index' %}">Admin side</a></div>
+        {% endif %}
+        <div class="profile-userinfo">
+            <h2>{{ user.username }}</h2>
+        </div>
+        <div class="profile-userinfo">
+            <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+        </div>
+        <div class="profile-userinfo profile-userinfo-email">
+            <h2>{{ user.email }}</h2>
+        </div>
+    </div>
+    <div class="estate-list">
+        <h1 class="estate-list-header">Mine Arveoppgjør:</h1>
+        {% if estates|length > 0%}
+        {% for estate in estates %}
+        <div class="estate">
+            <div class="estate-header">
+                <h3 class="estate-header-title">Arveoppgjør: <span style="font-weight: 200">{{ estate.0.name }}</span>
+                </h3>
+            </div>
+            <div class="estate-members">
+                <h3 class="estate-members-title">Medlemmer:</h3>
+                <div class="estate-members-container">
+                    {% for member in estate.1 %}
+                    <h5 class="estate-member-name">{{ member.first_name }} {{ member.last_name }}</h5>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div>
+            <h2 style="margin: 20px; font-weight: 200;">Du er ikke registrert i noen arveoppgjør</h2>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
