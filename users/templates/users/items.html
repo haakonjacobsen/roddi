@@ -1,6 +1,9 @@
 {% extends "dodsbo/base.html" %}
 {% block content %}
 <div class="asset-grid">
+    {% if assets|length == 0 %}
+    <h1>Du har ingen gjenstander</h1>
+    {% endif %}
     {% for asset in assets %}
     <div class="asset">
         <div class="asset-header">
