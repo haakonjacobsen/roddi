@@ -4,20 +4,13 @@ from django.contrib.auth.models import User
 
 
 class Estate(models.Model):
-    estateID = models.IntegerField()
     name = models.CharField(max_length=100)
-
-    def __self__(self):
-        return (self.estateID, name)
 
 
 class Item(models.Model):
-    itemID = models.IntegerField()
     name = models.CharField(max_length=100)
     value = models.IntegerField()
     estateID = models.ForeignKey(Estate, on_delete=models.CASCADE)
-    status = models.CharField(max_length=100)
-    owner_username = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(default="Beskrivelse mangler")
 
 

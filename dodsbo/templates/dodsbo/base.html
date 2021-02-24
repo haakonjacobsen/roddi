@@ -41,6 +41,9 @@
                 <a href="#"><h2 class="header-nav-text">Fullført</h2></a>
             </div>
             -->
+        <a href="{% url 'items' %}">
+            <h2 class="header-nav-text">Gjenstander</h2>
+        </a>
         {% else %}
         <a href="{% url 'login' %}">
             <h2 class="header-nav-text">Logg inn</h2>
