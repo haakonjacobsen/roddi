@@ -29,6 +29,11 @@ class Wish(models.Model):
     donate = models.BooleanField(default=False)
     discard = models.BooleanField(default=False)
 
+class Favorite(models.Model):
+    itemID = models.ForeignKey(Item, on_delete=models.CASCADE)
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    favorite = models.BooleanField(default=False)
+
 
 class Participate(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
