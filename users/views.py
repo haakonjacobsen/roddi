@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm
-from dodsbo.models import Item, Estate, Participate
+from .forms import UserRegisterForm, VoteForm
+from dodsbo.models import Item, Estate, Participate, Wish
 
 
 def register(request):
@@ -11,6 +11,7 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
+            print(username)
             messages.success(
                 request, f'Registrering var vellykket, du kan nå logge inn!')
             return redirect('login')
@@ -55,3 +56,18 @@ def items(request):
         'assets': user_items
     }
     return render(request, 'users/items.html', context)
+
+@login_required
+def vote(request):
+    if request.method == "POST":
+        form = VoteForm(request.POST)
+        current_user = request.user
+        choice = request.POST.get('btn')
+        print("choice: " + choice)
+        Wish = Wish.objects.create(itemID=1, username=current_user, choice=choice)
+        Wish.full_clean(exclude=None, validate_unique=True)
+        Wish.save()
+
+    else:
+        form = VoteForm()
+    return render(request, 'items.html', {'form': form})

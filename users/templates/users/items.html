@@ -1,4 +1,5 @@
 {% extends "dodsbo/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="asset-grid">
     {% if assets|length == 0 %}
@@ -14,18 +15,32 @@
             <p>{{ asset.description }}</p>
         </div>
         <div class="asset-vote-panel">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form }}
+                <input type="radio" name="btn" value="0"><label for="0">Fordel</label>
+                <input type="radio" name="btn" value="1"><label for="1">Doner</label>
+                <input type="radio" name="btn" value="2"><label for="2">Kast</label>
+                <button type="submit"> Stem </button>
+            </form>
+            <h1>{{ choice }}</h1>
+
+            <!--
             <div class="asset-vote-button asset-vote-share">
-                <h4>Fordel</h4>
-                <h5 class="asset-vote-count">0</h5>
+                <form action="actionURL" method="GET">
+                    <button type="submit">Fordel</button>
+                </form>
+                <h5 class="asset-vote-count">{ }</h5>
             </div>
             <div class="asset-vote-button asset-vote-donate">
-                <h4>Doner</h4>
+                <button>Doner</button>
                 <h5 class="asset-vote-count">0</h5>
             </div>
             <div class="asset-vote-button asset-vote-discard">
-                <h4>Kast</h4>
+                <button>Kast</button>
                 <h5 class="asset-vote-count">0</h5>
             </div>
+        -->
         </div>
     </div>
     {% endfor %}
