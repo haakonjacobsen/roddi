@@ -40,20 +40,23 @@ def profile(request):
     return render(request, 'users/profile.html', context)
 
 
-@login_required
-def items(request):
+def load_items(request):
     current_user = request.user
-    items = list(Item.objects.all())
+    item_list = list(Item.objects.all())
     estates = []
     for par in Participate.objects.all():
         if par.username == current_user:
             estates.append(par.estateID)
     user_items = []
-    for item in items:
+    for item in item_list:
         if item.estateID in estates:
             user_items.append(item)
+    return user_items
+
+@login_required
+def items(request):
     context = {
-        'assets': user_items
+        'assets': load_items(request)
     }
     return render(request, 'users/items.html', context)
 
@@ -64,9 +67,9 @@ def vote(request):
         form = VoteForm(request.POST)
         current_user = request.user
         post_itemID = request.POST.get('itemID')
-        items = list(Item.objects.all())
+        item_list = list(Item.objects.all())
         clicked_item = None
-        for item in items:
+        for item in item_list:
             if item.id == post_itemID:
                 clicked_item = item
         choice = request.POST.get('btn')
@@ -77,4 +80,9 @@ def vote(request):
 
     else:
         form = VoteForm()
-    return render(request, 'users/items.html', {'form': form})
+
+    context = {
+        'assets': load_items(request)
+    }
+
+    return render(request, 'users/items.html', context)
