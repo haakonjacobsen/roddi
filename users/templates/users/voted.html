@@ -18,11 +18,10 @@
             <form method="POST" action="{% url 'vote' %}">
                 {% csrf_token %}
                 {{ form }}
-                <input type="hidden" name="itemID" value="{{ asset.id }}" />
                 <input type="radio" name="btn" value="0"><label for="0">Fordel</label>
                 <input type="radio" name="btn" value="1"><label for="1">Doner</label>
                 <input type="radio" name="btn" value="2"><label for="2">Kast</label>
-                <button type="submit" value={{ asset.itemID }}> Stem </button>
+                <button type="submit"> Stem </button>
             </form>
 
             <h1>{{ choice }}</h1>

@@ -59,15 +59,22 @@ def items(request):
 
 @login_required
 def vote(request):
+    form = VoteForm(request.POST or None)
     if request.method == "POST":
         form = VoteForm(request.POST)
         current_user = request.user
+        post_itemID = request.POST.get('itemID')
+        items = list(Item.objects.all())
+        clicked_item = None
+        for item in items:
+            if item.id == post_itemID:
+                clicked_item = item
         choice = request.POST.get('btn')
         print("choice: " + choice)
-        Wish = Wish.objects.create(itemID=1, username=current_user, choice=choice)
-        Wish.full_clean(exclude=None, validate_unique=True)
-        Wish.save()
+        wish = Wish.objects.create(itemID=item, username=current_user, choice=choice)
+        wish.full_clean(exclude=None, validate_unique=True)
+        wish.save()
 
     else:
         form = VoteForm()
-    return render(request, 'items.html', {'form': form})
+    return render(request, 'users/items.html', {'form': form})
