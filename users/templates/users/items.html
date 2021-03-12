@@ -13,36 +13,29 @@
         </div>
         <div class="asset-description">
             <p>{{ asset.description }}</p>
+            <p>{{ asset.check }}</p>
         </div>
         <div class="asset-vote-panel">
             <form method="POST" action="{% url 'vote' %}">
                 {% csrf_token %}
                 {{ form }}
                 <input type="hidden" name="itemID" value="{{ asset.id }}" />
-                <input type="radio" class="radio" name="btn" value="0"><label for="0">Fordel</label>
-                <input type="radio" class="radio" name="btn" value="1"><label for="1">Doner</label>
-                <input type="radio" class="radio" name="btn" value="2"><label for="2">Kast</label>
+                <input type="radio" class="radio" name="btn" value="0" 
+                {% if asset.check == 0 %} checked {% endif %}
+                >
+                <label for="0">Fordel</label>
+                <input type="radio" class="radio" name="btn" value="1" 
+                {% if asset.check == 1 %} checked {% endif %}
+                >
+                <label for="1">Doner</label>
+                <input type="radio" class="radio" name="btn" value="2"
+                {% if asset.check == 2 %} checked {% endif %}
+                >
+                <label for="2">Kast</label>
                 <button type="submit" value={{ asset.itemID }} action="{% url 'items' %}"> Stem </button>
+                
             </form>
 
-            <h1>{{ choice }}</h1>
-
-            <!--
-            <div class="asset-vote-button asset-vote-share">
-                <form action="actionURL" method="GET">
-                    <button type="submit">Fordel</button>
-                </form>
-                <h5 class="asset-vote-count">{ }</h5>
-            </div>
-            <div class="asset-vote-button asset-vote-donate">
-                <button>Doner</button>
-                <h5 class="asset-vote-count">0</h5>
-            </div>
-            <div class="asset-vote-button asset-vote-discard">
-                <button>Kast</button>
-                <h5 class="asset-vote-count">0</h5>
-            </div>
-        -->
         </div>
     </div>
     {% endfor %}
