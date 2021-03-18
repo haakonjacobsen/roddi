@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, VoteForm
-from dodsbo.models import Item, Estate, Participate, Wish
+from dodsbo.models import Item, Estate, Participate, Wish, Favorite
 
 
 def register(request):
@@ -102,3 +102,25 @@ def vote(request):
     }
 
     return render(request, 'users/items.html', context)
+
+def favorite_item(request):
+    user = request.user
+    if request.method == 'POST':
+        item_id = request.POST.get('item_id')
+        item_object = Item.objects.get(id=item_id)   
+
+        if user in item_object.Favorite.all():
+            item_object.Favorite.remove(user)
+        else:
+            item_object.Favorite.add(user)
+        
+        like, created = Favorite.objects.get_or_create(username=user, itemID_id=item_id)
+
+        if not created:
+            if like.favorite == 'Ønsket':
+                like.favorite = 'Angre ønsket'
+            else:
+                like.favorite = 'Ønsket'
+        like.save()
+
+    return redirect('items:items-list')
