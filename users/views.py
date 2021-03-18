@@ -85,12 +85,10 @@ def vote(request):
         for item in item_list:
             if item.id == post_itemID:
                 clicked_item = item
-        prev_choice, id = checkWish(current_user, clicked_item)
         choice = request.POST.get('btn')
         print("choice: " + choice)
-        if prev_choice != -1: #dette funker ikke 
-            Wish.objects.filter(id=id).delete()
-        Wish.objects.get_or_create(itemID=item, username=current_user)
+
+        wish, created = Wish.objects.get_or_create(itemID=item, username=current_user)
         wish.choice = choice
         wish.full_clean(exclude=None, validate_unique=True)
         wish.save()
