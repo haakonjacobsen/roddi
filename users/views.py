@@ -90,7 +90,8 @@ def vote(request):
         print("choice: " + choice)
         if prev_choice != -1: #dette funker ikke 
             Wish.objects.filter(id=id).delete()
-        wish = Wish.objects.create(itemID=item, username=current_user, choice=choice)
+        Wish.objects.get_or_create(itemID=item, username=current_user)
+        wish.choice = choice
         wish.full_clean(exclude=None, validate_unique=True)
         wish.save()
 
