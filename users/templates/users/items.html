@@ -1,4 +1,5 @@
 {% extends "dodsbo/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="asset-grid">
     {% if assets|length == 0 %}
@@ -12,6 +13,7 @@
         </div>
         <div class="asset-description">
             <p>{{ asset.description }}</p>
+            <p>{{ asset.check }}</p>
         </div>
         <div>
             <form action="{% url 'items:favorite-list' %}" method='POST'>
@@ -26,18 +28,26 @@
                 <strong>Ønsker: {{ asset.Favorite.all.count }} </strong>
         </div>
         <div class="asset-vote-panel">
-            <div class="asset-vote-button asset-vote-share">
-                <h4>Fordel</h4>
-                <h5 class="asset-vote-count">0</h5>
-            </div>
-            <div class="asset-vote-button asset-vote-donate">
-                <h4>Doner</h4>
-                <h5 class="asset-vote-count">0</h5>
-            </div>
-            <div class="asset-vote-button asset-vote-discard">
-                <h4>Kast</h4>
-                <h5 class="asset-vote-count">0</h5>
-            </div>
+            <form method="POST" action="{% url 'vote' %}">
+                {% csrf_token %}
+                {{ form }}
+                <input type="hidden" name="itemID" value="{{ asset.id }}" />
+                <input type="radio" class="radio" name="btn" value="0" 
+                {% if asset.check == 0 %} checked {% endif %}
+                >
+                <label for="0">Fordel</label>
+                <input type="radio" class="radio" name="btn" value="1" 
+                {% if asset.check == 1 %} checked {% endif %}
+                >
+                <label for="1">Doner</label>
+                <input type="radio" class="radio" name="btn" value="2"
+                {% if asset.check == 2 %} checked {% endif %}
+                >
+                <label for="2">Kast</label>
+                <button type="submit" value={{ asset.itemID }} action="{% url 'items' %}"> Stem </button>
+                
+            </form>
+
         </div>
     </div>
     {% endfor %}

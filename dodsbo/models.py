@@ -36,9 +36,16 @@ class Comment(models.Model):
 class Wish(models.Model):
     itemID = models.ForeignKey(Item, on_delete=models.CASCADE)
     username = models.ForeignKey(User, on_delete=models.CASCADE)
-    share = models.BooleanField(default=False)
-    donate = models.BooleanField(default=False)
-    discard = models.BooleanField(default=False)
+    choices = (
+        (0 , 'Fordel'),
+        (1, 'Doner'),
+        (2, 'Kast'),
+    )
+    choice = models.IntegerField(max_length=1, choices=choices, default=1)
+
+    #share = models.BooleanField(default=False)
+    #donate = models.BooleanField(default=False)
+    #discard = models.BooleanField(default=False)
 
 WISH_CHOICES = (
     ('Ønsket', 'Ønsket'),
