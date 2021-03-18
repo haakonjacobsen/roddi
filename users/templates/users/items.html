@@ -13,6 +13,18 @@
         <div class="asset-description">
             <p>{{ asset.description }}</p>
         </div>
+        <div>
+            <form action="{% url 'items:favorite-list' %}" method='POST'>
+                {% csrf_token %}
+                <input type='hidden' name='item_id' value={{asset.id}}>
+                {% if user not in asset.Favorite.all %}
+                    <button class="ui button positive" type="submit">Ønsket</button>
+                {% else%}
+                    <button class="ui button negative" type="submit">Angre</button>
+                {% endif %}
+                </form>
+                <strong>Ønsker: {{ asset.Favorite.all.count }} </strong>
+        </div>
         <div class="asset-vote-panel">
             <div class="asset-vote-button asset-vote-share">
                 <h4>Fordel</h4>
