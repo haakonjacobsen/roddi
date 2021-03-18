@@ -44,7 +44,7 @@
                 {% if asset.check == 2 %} checked {% endif %}
                 >
                 <label for="2">Kast</label>
-                <button type="submit" value={{ asset.itemID }} action="{% url 'items' %}"> Stem </button>
+                <button type="submit" value="{{ asset.id }}" action="{% url 'vote' %}"> Stem </button>
                 
             </form>
 

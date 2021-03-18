@@ -64,3 +64,8 @@ class Favorite(models.Model):
 class Participate(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     estateID = models.ForeignKey(Estate, on_delete=models.CASCADE)
+
+class Alert(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    estateID = models.ForeignKey(Estate, on_delete=models.CASCADE)
+
