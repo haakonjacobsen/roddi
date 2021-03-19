@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, VoteForm
-from dodsbo.models import Item, Estate, Participate, Wish, Favorite
+from dodsbo.models import Item, Estate, Participate, Wish, Favorite, Alert
 
 
 def register(request):
@@ -20,13 +20,26 @@ def register(request):
     return render(request, 'users/register.html', {'form': form})
 
 
+def checkAlert(user, estate):
+    check = False
+    alerts = list(Alert.objects.all())
+    for alert in alerts:
+        if alert.estateID == estate and alert.user == user:
+            check = True
+    return check
+
+
+
 @login_required  # Krever at man må være logget inn for å aksessere siden
 def profile(request):
     current_user = request.user
     participate_list = list(Participate.objects.filter(username=current_user))
     estates = []
+    messages1 = []
     for participate in participate_list:
         estate = participate.estateID
+        if checkAlert(current_user, estate):
+            messages1.append(f'Du må fulføre oppgjøret for: {estate.name}')
         part_memb_list = list(Participate.objects.filter(estateID=estate))
         estate_members = []
         for par in part_memb_list:
@@ -34,7 +47,8 @@ def profile(request):
         estates.append([estate, estate_members])
     context = {
         # gjenstand funker som nøkkel til kodeblokken i home.html
-        'estates': estates
+        'estates': estates,
+        'me': messages1
 
     }
     return render(request, 'users/profile.html', context)
@@ -96,11 +110,11 @@ def vote(request):
     else:
         form = VoteForm()
 
-    context = {
-        'assets': load_items(request)
-    }
+    #context = {
+     #   'assets': load_items(request)
+    #}
 
-    return render(request, 'users/items.html', context)
+    return redirect('items:items-list')
 
 def favorite_item(request):
     user = request.user
