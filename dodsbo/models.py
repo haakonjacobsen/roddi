@@ -43,10 +43,7 @@ class Wish(models.Model):
     )
     choice = models.IntegerField(max_length=1, choices=choices, default=1)
 
-    #share = models.BooleanField(default=False)
-    #donate = models.BooleanField(default=False)
-    #discard = models.BooleanField(default=False)
-
+  
 WISH_CHOICES = (
     ('Ønsket', 'Ønsket'),
     ('Angre ønsket', 'Angre ønsket'),
