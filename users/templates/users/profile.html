@@ -3,7 +3,10 @@
 <div class="profile-content">
     <div class="profile-info-bar">
         {% if user.is_staff %}
-        <div class="profile-userinfo"><a class="profile-admin" href="{% url 'admin:index' %}">Admin side</a></div>
+        <div class="profile-userinfo">
+            <a class="profile-admin" href="{% url 'admin:index' %}">Admin side</a>
+            <a class="profile-admin" href="{% url 'dodsbo-info' %}">Infoside</a>
+        </div>
         {% endif %}
         <div class="profile-userinfo">
             <h2>{{ user.username }}</h2>

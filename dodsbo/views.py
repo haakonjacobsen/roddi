@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render    # Hjelper med å laste inn HTML filer
 from django.http import HttpResponse
 from .models import Estate
@@ -66,4 +67,20 @@ def home(request):    # Denne funksjonen returnerer hjemmesiden
 
 
 def info(request):    # Denne funksjonen returnerer info siden
-    return render(request, 'dodsbo/info.html', {"title": "info"})
+    user_count = User.all.count
+    estatates_count = Estate.all.count
+    items_count = Item.all.count
+    estatates_count_finished = 0
+    for estates in Estate.objects.all():
+        if estates.isCompleted:
+            estates_count_finished += 1
+    Stats = [user_count, estatates_count, items_count, estatates_count_finished]
+    Context = {
+        "stats": Stats,
+        "title": "info"
+    }
+
+    return render(request, 'dodsbo/info.html', Context)
+
+
+

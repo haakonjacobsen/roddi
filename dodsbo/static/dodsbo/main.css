@@ -48,6 +48,15 @@ a:active {
   font-family: "Josefin Slab";
   text-align: center;
 }
+.home-description{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 40px;
+  font-family: "Josefin Slab";
+  text-align: center;
+}
 .home-content img{
   filter: grayscale(100%);
   filter: blur(8px);
