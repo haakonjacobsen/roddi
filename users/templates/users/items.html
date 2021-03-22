@@ -28,10 +28,10 @@
                 <strong>Ønsker: {{ asset.Favorite.all.count }} </strong>
         </div>
         <div class="asset-vote-panel">
-            <form method="POST" action="{% url 'vote' %}">
+            <form method="POST" action="{% url 'vote' %}" value={{asset.id}}>
                 {% csrf_token %}
                 {{ form }}
-                <input type="hidden" name="itemID" value="{{ asset.id }}" />
+                <input type="hidden" name="itemID" value={{asset.id}} />
                 <input type="radio" class="radio" name="btn" value="0" 
                 {% if asset.check == 0 %} checked {% endif %}
                 >

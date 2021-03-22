@@ -102,7 +102,7 @@ def vote(request):
         choice = request.POST.get('btn')
         print("choice: " + choice)
 
-        wish, created = Wish.objects.get_or_create(itemID=item, username=current_user)
+        wish, created = Wish.objects.get_or_create(itemID_id=post_itemID, username=current_user)
         wish.choice = choice
         wish.full_clean(exclude=None, validate_unique=True)
         wish.save()
