@@ -19,20 +19,20 @@ def home(request):    # Denne funksjonen returnerer hjemmesiden
 
 
 def info(request):    # Denne funksjonen returnerer info siden
-    user_count = User.all.count
-    estatates_count = Estate.all.count
-    items_count = Item.all.count
-    estatates_count_finished = 0
+    user_count = User.objects.count()
+    estates_count = Estate.objects.count()
+    items_count = Item.objects.count()
+    estates_count_finished = 0
     for estates in Estate.objects.all():
         if estates.isCompleted:
             estates_count_finished += 1
-    Stats = [user_count, estatates_count, items_count, estatates_count_finished]
-    Context = {
-        "stats": Stats,
+    stats = [user_count, estates_count, items_count, estates_count_finished]
+    context = {
+        "stats": stats,
         "title": "info"
     }
 
-    return render(request, 'dodsbo/info.html', Context)
+    return render(request, 'dodsbo/info.html', context)
 
 
 
