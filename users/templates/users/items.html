@@ -31,7 +31,7 @@
             <form method="POST" action="{% url 'vote' %}">
                 {% csrf_token %}
                 {{ form }}
-                <input type="hidden" name="itemID" value="{{ asset.id }}" />
+                <input type="hidden" name="itemID" value={{ asset.id }} />
                 <input type="radio" class="radio" name="btn" value="0" 
                 {% if asset.check == 0 %} checked {% endif %}
                 >
@@ -44,7 +44,7 @@
                 {% if asset.check == 2 %} checked {% endif %}
                 >
                 <label for="2">Kast</label>
-                <button type="submit" value={{ asset.itemID }} action="{% url 'items' %}"> Stem </button>
+                <button type="submit"> Stem </button>
                 
             </form>
 

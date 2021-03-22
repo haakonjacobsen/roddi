@@ -88,7 +88,7 @@ def vote(request):
         choice = request.POST.get('btn')
         print("choice: " + choice)
 
-        wish, created = Wish.objects.get_or_create(itemID=item, username=current_user)
+        wish, created = Wish.objects.get_or_create(itemID=post_itemID, username=current_user)
         wish.choice = choice
         wish.full_clean(exclude=None, validate_unique=True)
         wish.save()
@@ -100,7 +100,7 @@ def vote(request):
         'assets': load_items(request)
     }
 
-    return render(request, 'users/items.html', context)
+    return redirect('items:items-list')
 
 def favorite_item(request):
     user = request.user
