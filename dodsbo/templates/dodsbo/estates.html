@@ -1,0 +1,15 @@
+{% extends "dodsbo/base.html" %}
+{% block content %}
+{% for estate in estates %}
+<a href="{% url 'estate-detail' estate.id %}">
+    <div class="estate">
+        <div class="estate-header">
+            <h3 class="estate-header-title">ID: {{ estate.id }}
+            </h3>
+            <h3 class="estate-header-title">Arveoppgjør: {{ estate.name }}
+            </h3>
+        </div>
+    </div>
+</a>
+{% endfor %}
+{% endblock content %}
