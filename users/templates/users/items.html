@@ -13,6 +13,9 @@
         <div class="asset-description">
             <p>{{ asset.description }}</p>
         </div>
+        <div class="comment-section" style="text-align:right;">
+            <a href="{% url 'comments' asset.pk %}">Se kommentarer</a>
+        </div>
         <div class="asset-vote-panel">
             <div class="asset-vote-button asset-vote-share">
                 <h4>Fordel</h4>
@@ -27,7 +30,11 @@
                 <h5 class="asset-vote-count">0</h5>
             </div>
         </div>
+
     </div>
+
+
     {% endfor %}
+
 </div>
 {% endblock content %}

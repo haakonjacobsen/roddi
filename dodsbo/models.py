@@ -15,11 +15,14 @@ class Item(models.Model):
 
 
 class Comment(models.Model):
-    initial_time = models.DateTimeField(default=timezone.now)
-    text = models.TextField()
-    updated_time = models.DateTimeField(default=timezone.now)
-    itemID = models.ForeignKey(Item, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    itemID = models.ForeignKey(Item, related_name='comments', on_delete=models.CASCADE)
+    name = models.ForeignKey(User, on_delete=models.CASCADE)
+    date_added = models.DateTimeField(auto_now_add=True)
+    body = models.TextField()
+
+
+    def __str__(self):
+        return '%s - %s - %s' % (self.itemID.name, self.name, self.date_added)
 
 
 class Wish(models.Model):
