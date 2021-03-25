@@ -43,19 +43,20 @@ a:active {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
   font-size: 60px;
+  transform: translate(-50%,-50%);
   font-family: "Josefin Slab";
   text-align: center;
 }
 .home-description{
-  position: relative;
+  position: absolute;
   left: 50%;
-  top: 50%;
+  top: 75%;
   transform: translate(-50%,-50%);
-  font-size: 40px;
+  font-size: 30px;
   font-family: "Josefin Slab";
   text-align: center;
+  width: 900px;
 }
 .home-content img{
   filter: grayscale(100%);
