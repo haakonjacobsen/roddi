@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, VoteForm
-from dodsbo.models import Item, Estate, Participate, Wish, Favorite, Alert
+from .forms import UserRegisterForm, VoteForm, CommentForm
+from dodsbo.models import Item, Estate, Participate, Wish, Favorite, Alert, Comment
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, ListView
 
 
 def register(request):
@@ -137,3 +139,29 @@ def favorite_item(request):
         like.save()
 
     return redirect('items:items-list')
+
+def comment(request, pk):
+    item_pk = pk
+    item_comments = Comment.objects.all()
+    comments = []
+    for c in item_comments:
+        if c.itemID_id == item_pk:
+            comments.append(c)
+    context = {
+        'comments': comments
+    }
+
+    return render(request, 'users/comments.html', context)
+
+
+class AddCommentView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'users/add_comment.html'
+
+
+    def form_valid(self, form):
+        form.instance.itemID_id = self.kwargs['pk']
+        return super().form_valid(form)
+
+    success_url = reverse_lazy('items')
