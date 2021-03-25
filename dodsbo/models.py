@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 class Estate(models.Model):
     name = models.CharField(max_length=100)
+    isCompleted = models.BooleanField(default=False)
 
 
 class Item(models.Model):
