@@ -27,6 +27,9 @@
                 </form>
                 <strong>Ønsker: {{ asset.Favorite.all.count }} </strong>
         </div>
+        <div class="comment-section" style="text-align:right;">
+            <a href="{% url 'comments' asset.pk %}">Se kommentarer</a>
+        </div>
         <div class="asset-vote-panel">
             <form method="POST" action="{% url 'vote' %}" value={{asset.id}}>
                 {% csrf_token %}
@@ -49,7 +52,11 @@
             </form>
 
         </div>
+
     </div>
+
+
     {% endfor %}
+
 </div>
 {% endblock content %}
