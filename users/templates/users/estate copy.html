@@ -1,0 +1,30 @@
+{% extends "dodsbo/base.html" %}
+{% block content %}
+<div class="asset-grid">
+    {% for item in Items %}
+    <div class="asset">
+        <div class="asset-header">
+            <h3 class="asset-header-title">{{ item.name }}</h3>
+            <h3 class="asset-header-value">NOK: {{ item.value }}</h3>
+        </div>
+        <div class="asset-description">
+            <p>{{ item.description }}</p>
+        </div>
+        <div class="asset-vote-panel">
+            <div class="asset-vote-button asset-vote-share">
+                <h4>Fordel</h4>
+                <h5 class="asset-vote-count">0</h5>
+            </div>
+            <div class="asset-vote-button asset-vote-donate">
+                <h4>Doner</h4>
+                <h5 class="asset-vote-count">0</h5>
+            </div>
+            <div class="asset-vote-button asset-vote-discard">
+                <h4>Kast</h4>
+                <h5 class="asset-vote-count">0</h5>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

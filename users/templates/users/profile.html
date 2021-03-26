@@ -19,20 +19,23 @@
         <h1 class="estate-list-header">Mine Arveoppgjør:</h1>
         {% if estates|length > 0%}
         {% for estate in estates %}
-        <div class="estate">
-            <div class="estate-header">
-                <h3 class="estate-header-title">Arveoppgjør: <span style="font-weight: 200">{{ estate.0.name }}</span>
-                </h3>
-            </div>
-            <div class="estate-members">
-                <h3 class="estate-members-title">Medlemmer:</h3>
-                <div class="estate-members-container">
-                    {% for member in estate.1 %}
-                    <h5 class="estate-member-name">{{ member.first_name }} {{ member.last_name }}</h5>
-                    {% endfor %}
+        <a href="{% url 'estate-detail' estate.0.id %}">
+            <div class="estate">
+                <div class="estate-header">
+                    <h3 class="estate-header-title">Arveoppgjør:
+                        <span style="font-weight: 200">{{ estate.0.name}}</span>
+                    </h3>
+                </div>
+                <div class="estate-members">
+                    <h3 class="estate-members-title">Medlemmer:</h3>
+                    <div class="estate-members-container">
+                        {% for member in estate.1 %}
+                        <h5 class="estate-member-name">{{ member.first_name }} {{ member.last_name }}</h5>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
         {% endfor %}
         {% else %}
         <div>

@@ -18,13 +18,11 @@ def home(request):    # Denne funksjonen returnerer hjemmesiden
 
 class EstateListView(ListView):
     template_name = 'dodsbo/estates.html'
-    context_object_name = 'estates'
     model = Estate
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['estates'] = Estate.objects.filter(
-            field__in=Participate.objects.filter(username=request.user))
+        context['estates'] = Estate.objects.all()
         return context
 
 
