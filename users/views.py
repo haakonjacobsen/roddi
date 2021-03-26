@@ -31,7 +31,6 @@ def checkAlert(user, estate):
     return check
 
 
-
 @login_required  # Krever at man må være logget inn for å aksessere siden
 def profile(request):
     current_user = request.user
@@ -71,6 +70,7 @@ def load_items(request):
             user_items.append(item)
     return user_items
 
+
 def checkWish(user, item):
     wishes = list(Wish.objects.all())
     choiceInt = -1
@@ -89,6 +89,7 @@ def items(request):
     }
     return render(request, 'users/items.html', context)
 
+
 @login_required
 def vote(request):
     form = VoteForm(request.POST or None)
@@ -104,7 +105,8 @@ def vote(request):
         choice = request.POST.get('btn')
         print("choice: " + choice)
 
-        wish, created = Wish.objects.get_or_create(itemID_id=post_itemID, username=current_user)
+        wish, created = Wish.objects.get_or_create(
+            itemID_id=post_itemID, username=current_user)
         wish.choice = choice
         wish.full_clean(exclude=None, validate_unique=True)
         wish.save()
@@ -112,24 +114,26 @@ def vote(request):
     else:
         form = VoteForm()
 
-    #context = {
+    # context = {
      #   'assets': load_items(request)
-    #}
+    # }
 
     return redirect('items:items-list')
+
 
 def favorite_item(request):
     user = request.user
     if request.method == 'POST':
         item_id = request.POST.get('item_id')
-        item_object = Item.objects.get(id=item_id)   
+        item_object = Item.objects.get(id=item_id)
 
         if user in item_object.Favorite.all():
             item_object.Favorite.remove(user)
         else:
             item_object.Favorite.add(user)
-        
-        like, created = Favorite.objects.get_or_create(username=user, itemID_id=item_id)
+
+        like, created = Favorite.objects.get_or_create(
+            username=user, itemID_id=item_id)
 
         if not created:
             if like.favorite == 'Ønsket':
@@ -140,10 +144,12 @@ def favorite_item(request):
 
     return redirect('items:items-list')
 
+
 def comment(request, pk):
     item_pk = pk
     item_comments = Comment.objects.all()
     comments = []
+    name = ""
     for c in item_comments:
         if c.itemID_id == item_pk:
             comments.insert(0, c)
@@ -160,7 +166,6 @@ class AddCommentView(CreateView):
     model = Comment
     form_class = CommentForm
     template_name = 'users/add_comment.html'
-
 
     def form_valid(self, form):
         form.instance.itemID_id = self.kwargs['pk']

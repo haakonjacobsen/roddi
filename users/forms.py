@@ -14,15 +14,17 @@ class UserRegisterForm(UserCreationForm):
 
 
 class VoteForm(forms.Form):
-	choices = (
-        (0 , 'Fordel'),
+    choices = (
+        (0, 'Fordel'),
         (1, 'Doner'),
         (2, 'Kast'),
     )
-	choice = forms.CharField(label='Choice', widget=forms.RadioSelect(choices=choices))
-	class Meta:
-		model = Wish
-		fields = ['choices']
+    choice = forms.CharField(
+        label='Choice', widget=forms.RadioSelect(choices=choices))
+
+    class Meta:
+        model = Wish
+        fields = ['choices']
 
 
 class CommentForm(forms.ModelForm):
