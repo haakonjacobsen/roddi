@@ -146,9 +146,11 @@ def comment(request, pk):
     comments = []
     for c in item_comments:
         if c.itemID_id == item_pk:
-            comments.append(c)
+            comments.insert(0, c)
+            name = comments[0].itemID.name
     context = {
-        'comments': comments
+        'comments': comments,
+        'name': name
     }
 
     return render(request, 'users/comments.html', context)
