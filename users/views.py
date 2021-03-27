@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.views.generic import ListView, DetailView
 from .forms import UserRegisterForm, VoteForm, CommentForm
 from dodsbo.models import Item, Estate, Participate, Wish, Favorite, Alert, Comment
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView
+from django.http import HttpResponseRedirect
 
 
 def register(request):
@@ -31,6 +34,7 @@ def checkAlert(user, estate):
     return check
 
 
+'''
 @login_required  # Krever at man må være logget inn for å aksessere siden
 def profile(request):
     current_user = request.user
@@ -53,6 +57,61 @@ def profile(request):
 
     }
     return render(request, 'users/profile.html', context)
+'''
+
+
+class ProfileListView(ListView):
+    template_name = 'users/profile.html'
+    model = Estate
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ProfileListView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_user = self.request.user
+        participate_list = list(
+            Participate.objects.filter(username=current_user))
+        estates = []
+        for participate in participate_list:
+            estate = participate.estateID
+            part_memb_list = list(Participate.objects.filter(estateID=estate))
+            estate_members = []
+            for par in part_memb_list:
+                estate_members.append(par.username)
+            estates.append([estate, estate_members])
+
+        context['estates'] = estates
+        return context
+
+
+class EstateDetailView(DetailView):
+    template_name = 'users/estate.html'
+    model = Estate
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        # if(len(Participate.objects.filter(username=self.request.user, estateID=self.object)) > 0):
+        return super(EstateDetailView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_user = self.request.user
+        item_list = list(Item.objects.filter(estateID=self.object))
+        estates = []
+        for par in Participate.objects.all():
+            if par.username == current_user:
+                estates.append(par.estateID)
+        user_items = []
+        for item in item_list:
+            if item.estateID in estates:
+                choice, wish = checkWish(current_user, item)
+                item.check = choice
+                user_items.append(item)
+
+        context['assets'] = user_items
+        return context
 
 
 def load_items(request):
@@ -97,6 +156,8 @@ def vote(request):
         form = VoteForm(request.POST)
         current_user = request.user
         post_itemID = request.POST.get('itemID')
+        item = Item.objects.filter(id=post_itemID).first()
+        estate_id = item.estateID.pk
         item_list = list(Item.objects.all())
         clicked_item = None
         for item in item_list:
@@ -118,7 +179,7 @@ def vote(request):
      #   'assets': load_items(request)
     # }
 
-    return redirect('items:items-list')
+    return HttpResponseRedirect("/estate/{id}/".format(id=estate_id))
 
 
 def favorite_item(request):
@@ -126,7 +187,7 @@ def favorite_item(request):
     if request.method == 'POST':
         item_id = request.POST.get('item_id')
         item_object = Item.objects.get(id=item_id)
-
+        estate_id = item_object.estateID.pk
         if user in item_object.Favorite.all():
             item_object.Favorite.remove(user)
         else:
@@ -142,7 +203,7 @@ def favorite_item(request):
                 like.favorite = 'Ønsket'
         like.save()
 
-    return redirect('items:items-list')
+    return HttpResponseRedirect("/estate/{id}/".format(id=estate_id))
 
 
 def comment(request, pk):
