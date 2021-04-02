@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from users import views as user_views
-from users.views import ProfileListView, EstateDetailView
+from users.views import ProfileListView, EstateDetailView, AddCommentView
 
 
 urlpatterns = [
@@ -33,6 +33,5 @@ urlpatterns = [
     path('items/', include('users.urls', namespace='items')),
     path('items/<int:pk>/comments/', user_views.comment, name='comments'),
     path('items/<int:pk>/comments/add_comment/',
-         user_views.AddCommentView.as_view(), name='add_comment')
-
+         user_views.AddCommentView.as_view(), name='add_comment'),
 ]

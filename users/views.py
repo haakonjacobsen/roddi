@@ -225,11 +225,13 @@ def comment(request, pk):
 
 class AddCommentView(CreateView):
     model = Comment
-    form_class = CommentForm
-    template_name = 'users/add_comment.html'
+    fields = ['body']
+    template_name = 'users/comment_form.html'
 
     def form_valid(self, form):
         form.instance.itemID_id = self.kwargs['pk']
+        form.instance.name = self.request.user
         return super().form_valid(form)
 
-    success_url = reverse_lazy('items')
+    def get_success_url(self):
+        return reverse('comments', kwargs={'pk': self.kwargs['pk']})
