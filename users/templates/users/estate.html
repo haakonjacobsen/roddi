@@ -27,7 +27,7 @@
                 </form>
                 <strong>Ønsker: {{ asset.Favorite.all.count }} </strong>
         </div>
-        <div class="comment-section" style="text-align:right;">
+        <div class="comment-section">
             <a href="{% url 'comments' asset.pk %}">Se kommentarer</a>
         </div>
         <div class="asset-vote-panel">
@@ -35,11 +35,11 @@
                 {% csrf_token %}
                 {{ form }}
                 <input type="hidden" name="itemID" value={{asset.id}} />
-                <input type="radio" class="radio" name="btn" value="0" 
+                <input type="radio" class="radio" name="btn" value="0" onClick="{% url 'vote' %}"
                 {% if asset.check == 0 %} checked {% endif %}
                 >
                 <label for="0">Fordel</label>
-                <input type="radio" class="radio" name="btn" value="1" 
+                <input type="radio" class="radio" name="btn" value="1" onClick="{% url 'vote' %}"
                 {% if asset.check == 1 %} checked {% endif %}
                 >
                 <label for="1">Doner</label>
@@ -48,7 +48,7 @@
                 >
                 <label for="2">Kast</label>
                 <button type="submit" value="{{ asset.id }}" action="{% url 'vote' %}"> Stem </button>
-                
+
             </form>
 
         </div>
