@@ -1,4 +1,10 @@
-<div class="profile-estate-list">
+{% extends "dodsbo/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="asset-grid">
+    {% if assets|length == 0 %}
+    <h1>Du har ingen gjenstander</h1>
+    {% endif %}
     {% for asset in assets %}
     <div class="asset">
         <div class="asset-header">
@@ -7,21 +13,50 @@
         </div>
         <div class="asset-description">
             <p>{{ asset.description }}</p>
+            <p>{{ asset.check }}</p>
+        </div>
+        <div>
+            <form action="{% url 'items:favorite-list' %}" method='POST'>
+                {% csrf_token %}
+                <input type='hidden' name='item_id' value={{asset.id}}>
+                {% if user not in asset.Favorite.all %}
+                    <button class="ui button positive" type="submit">Ønsket</button>
+                {% else%}
+                    <button class="ui button negative" type="submit">Angre</button>
+                {% endif %}
+                </form>
+                <strong>Ønsker: {{ asset.Favorite.all.count }} </strong>
+        </div>
+        <div class="comment-section">
+            <a href="{% url 'comments' asset.pk %}">Se kommentarer</a>
         </div>
         <div class="asset-vote-panel">
-            <div class="asset-vote-button asset-vote-share">
-                <h4>Fordel</h4>
-                <h5 class="asset-vote-count">0</h5>
-            </div>
-            <div class="asset-vote-button asset-vote-donate">
-                <h4>Doner</h4>
-                <h5 class="asset-vote-count">0</h5>
-            </div>
-            <div class="asset-vote-button asset-vote-discard">
-                <h4>Kast</h4>
-                <h5 class="asset-vote-count">0</h5>
-            </div>
+            <form method="POST" action="{% url 'vote' %}" value={{asset.id}}>
+                {% csrf_token %}
+                {{ form }}
+                <input type="hidden" name="itemID" value={{asset.id}} />
+                <input type="radio" class="radio" name="btn" value="0" onClick="{% url 'vote' %}"
+                {% if asset.check == 0 %} checked {% endif %}
+                >
+                <label for="0">Fordel</label>
+                <input type="radio" class="radio" name="btn" value="1" onClick="{% url 'vote' %}"
+                {% if asset.check == 1 %} checked {% endif %}
+                >
+                <label for="1">Doner</label>
+                <input type="radio" class="radio" name="btn" value="2"
+                {% if asset.check == 2 %} checked {% endif %}
+                >
+                <label for="2">Kast</label>
+                <button type="submit" value="{{ asset.id }}" action="{% url 'vote' %}"> Stem </button>
+
+            </form>
+
         </div>
+
     </div>
+
+
     {% endfor %}
+
 </div>
+{% endblock content %}
