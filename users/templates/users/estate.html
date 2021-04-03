@@ -8,51 +8,75 @@
     {% for asset in assets %}
     <div class="asset">
         <div class="asset-header">
-            <h3 class="asset-header-title">{{ asset.name }}</h3>
-            <h3 class="asset-header-value">NOK: {{ asset.value }}</h3>
+            <div class="asset-header-info">
+              <h3 class="asset-header-title">{{ asset.name }}</h3>
+              <h5 class="asset-header-value">NOK. {{ asset.value }}</h5>
+            </div>
+            <div class="asset-header-favorite">
+                <form class="blank-form" action="{% url 'items:favorite-list' %}" method='POST'>
+                    {% csrf_token %}
+                    <input type='hidden' name='item_id' value={{asset.id}}>
+                    {% if user not in asset.Favorite.all %}
+                        <button class="asset-favorite-button" type="submit">
+                          <svg width="48" height="43" viewBox="0 0 48 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M44.4979 4.16569C42.1304 1.47937 38.8461 0 35.25 0C30.1924 0 26.9903 3.02062 25.1948 5.55469C24.729 6.21225 24.3327 6.87159 24 7.49203C23.6673 6.87159 23.2711 6.21225 22.8052 5.55469C21.0097 3.02062 17.8076 0 12.75 0C9.15394 0 5.86959 1.47947 3.50203 4.16578C1.24378 6.72834 0 10.1603 0 13.8295C0 17.8236 1.55934 21.5384 4.90734 25.5202C7.89956 29.0789 12.2043 32.7472 17.1891 36.9949C19.0465 38.5777 20.9674 40.2146 23.0123 42.0038L23.0737 42.0577C23.3389 42.2898 23.6694 42.4057 24 42.4057C24.3306 42.4057 24.6611 42.2897 24.9263 42.0577L24.9877 42.0038C27.0326 40.2146 28.9535 38.5778 30.8112 36.9947C35.7957 32.7472 40.1004 29.079 43.0927 25.5202C46.4407 21.5383 48 17.8236 48 13.8295C48 10.1603 46.7562 6.72834 44.4979 4.16569ZM28.9868 34.8542C27.3856 36.2186 25.7377 37.6229 24 39.1335C22.2624 37.6231 20.6144 36.2187 19.0129 34.854C9.25734 26.5409 2.8125 21.0489 2.8125 13.8295C2.8125 10.8455 3.80672 8.07384 5.61206 6.02531C7.43813 3.95353 9.97303 2.8125 12.75 2.8125C16.6058 2.8125 19.0984 5.18794 20.5103 7.18069C21.7767 8.96794 22.4376 10.7696 22.6629 11.4612C22.8515 12.0401 23.3912 12.4319 24 12.4319C24.6088 12.4319 25.1485 12.0401 25.3371 11.4612C25.5624 10.7696 26.2233 8.96794 27.4897 7.18059C28.9016 5.18794 31.3942 2.8125 35.25 2.8125C38.027 2.8125 40.5619 3.95353 42.3878 6.02531C44.1933 8.07384 45.1875 10.8455 45.1875 13.8295C45.1875 21.0489 38.7427 26.5409 28.9868 34.8542Z" fill="#4B4B4B"/>
+                          </svg>
+                        </button>
+                    {% else%}
+                        <button class="asset-favorite-button" type="submit">
+                          <svg width="48" height="42" viewBox="0 0 48 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M44.1921 4.11025C41.7074 1.45976 38.298 0 34.5912 0C31.8204 0 29.283 0.861524 27.0491 2.56044C25.9219 3.418 24.9005 4.46717 24 5.69175C23.0999 4.46753 22.0781 3.418 20.9506 2.56044C18.717 0.861524 16.1796 0 13.4088 0C9.70203 0 6.29224 1.45976 3.8075 4.11025C1.35242 6.72975 0 10.3084 0 14.1874C0 18.1799 1.51282 21.8345 4.76074 25.689C7.66626 29.1369 11.8422 32.6371 16.678 36.69C18.3292 38.0742 20.2009 39.6431 22.1444 41.3142C22.6578 41.7565 23.3167 42 24 42C24.683 42 25.3422 41.7565 25.8549 41.315C27.7983 39.6434 29.6711 38.0738 31.3231 36.689C36.1582 32.6367 40.3341 29.1369 43.2396 25.6887C46.4875 21.8345 48 18.1799 48 14.187C48 10.3084 46.6476 6.72975 44.1921 4.11025Z" fill="#DF7861"/>
+                          </svg>
+                        </button>
+                    {% endif %}
+                </form>
+            </div>
         </div>
         <div class="asset-description">
             <p>{{ asset.description }}</p>
-            <p>{{ asset.check }}</p>
         </div>
-        <div>
-            <form action="{% url 'items:favorite-list' %}" method='POST'>
-                {% csrf_token %}
-                <input type='hidden' name='item_id' value={{asset.id}}>
-                {% if user not in asset.Favorite.all %}
-                    <button class="ui button positive" type="submit">Ønsket</button>
-                {% else%}
-                    <button class="ui button negative" type="submit">Angre</button>
-                {% endif %}
-                </form>
-                <strong>Ønsker: {{ asset.Favorite.all.count }} </strong>
-        </div>
-        <div class="comment-section">
-            <a href="{% url 'comments' asset.pk %}">Se kommentarer</a>
-        </div>
-        <div class="asset-vote-panel">
-            <form method="POST" action="{% url 'vote' %}" value={{asset.id}}>
-                {% csrf_token %}
-                {{ form }}
-                <input type="hidden" name="itemID" value={{asset.id}} />
-                <input type="radio" class="radio" name="btn" value="0" onClick="{% url 'vote' %}"
-                {% if asset.check == 0 %} checked {% endif %}
-                >
-                <label for="0">Fordel</label>
-                <input type="radio" class="radio" name="btn" value="1" onClick="{% url 'vote' %}"
-                {% if asset.check == 1 %} checked {% endif %}
-                >
-                <label for="1">Doner</label>
-                <input type="radio" class="radio" name="btn" value="2"
-                {% if asset.check == 2 %} checked {% endif %}
-                >
-                <label for="2">Kast</label>
-                <button type="submit" value="{{ asset.id }}" action="{% url 'vote' %}"> Stem </button>
+        <div class="asset-bottom-part">
+          <a href="{% url 'comments' asset.pk %}">
+          <div class="asset-messages">
+            <div class="comment-section">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M36.4844 5.9369H32.9688V4.76502C32.9688 2.8265 31.3917 1.24939 29.4532 1.24939H3.51563C1.57711 1.24939 0 2.8265 0 4.76502V23.5151C0 25.4536 1.57711 27.0307 3.51563 27.0307H7.03126V32.8901C7.03126 33.9357 8.29861 34.452 9.03174 33.7187L11.0323 31.7182H24.2803L30.9683 38.4062C31.7018 39.14 32.9687 38.6249 32.9687 37.5776V31.7182H36.4844C38.4229 31.7182 40 30.1411 40 28.2026V9.45253C40.0001 7.51401 38.423 5.9369 36.4844 5.9369ZM9.37502 30.0609V25.8588C9.37502 25.2116 8.85033 24.6869 8.20314 24.6869H3.51563C2.86946 24.6869 2.34375 24.1612 2.34375 23.5151V4.76502C2.34375 4.11885 2.86946 3.59314 3.51563 3.59314H29.4532C30.0994 3.59314 30.6251 4.11885 30.6251 4.76502V23.5151C30.6251 24.1612 30.0994 24.6869 29.4532 24.6869H15.2344C14.9235 24.6869 14.6256 24.8105 14.4058 25.0302L9.37502 30.0609ZM37.6563 28.2026C37.6563 28.8487 37.1306 29.3744 36.4844 29.3744H31.7969C31.1497 29.3744 30.6251 29.8991 30.6251 30.5463V34.7484L25.5943 29.7177C25.3745 29.498 25.0765 29.3744 24.7657 29.3744H13.376L15.7198 27.0307H29.4532C31.3917 27.0307 32.9688 25.4536 32.9688 23.5151V8.28065H36.4844C37.1306 8.28065 37.6563 8.80636 37.6563 9.45253V28.2026Z" fill="#4B4B4B"/>
+                    <path d="M22.4219 8.2807H5.85938C5.21219 8.2807 4.6875 8.80539 4.6875 9.45258C4.6875 10.0998 5.21219 10.6245 5.85938 10.6245H22.4219C23.0691 10.6245 23.5938 10.0998 23.5938 9.45258C23.5938 8.80539 23.0691 8.2807 22.4219 8.2807Z" fill="#4B4B4B"/>
+                    <path d="M27.1094 12.9682H5.85938C5.21219 12.9682 4.6875 13.4929 4.6875 14.1401C4.6875 14.7873 5.21219 15.312 5.85938 15.312H27.1094C27.7566 15.312 28.2813 14.7873 28.2813 14.1401C28.2813 13.4929 27.7566 12.9682 27.1094 12.9682Z" fill="#4B4B4B"/>
+                    <path d="M17.7344 17.6557H5.85938C5.21219 17.6557 4.6875 18.1804 4.6875 18.8276C4.6875 19.4748 5.21219 19.9995 5.85938 19.9995H17.7344C18.3816 19.9995 18.9063 19.4748 18.9063 18.8276C18.9063 18.1804 18.3816 17.6557 17.7344 17.6557Z" fill="#4B4B4B"/>
+                  </svg>
+            </div>
+            <h5> Se meldinger</h5>
+            <div class="comment-arrow">
+              <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.4449 11.5245L8.31956 0.399387C8.06224 0.141869 7.71875 0 7.35249 0C6.98624 0 6.64274 0.141869 6.38543 0.399387L5.56612 1.21849C5.033 1.75222 5.033 2.61969 5.56612 3.15262L14.9083 12.4948L5.55576 21.8474C5.29844 22.1049 5.15637 22.4482 5.15637 22.8142C5.15637 23.1807 5.29844 23.524 5.55576 23.7817L6.37506 24.6006C6.63258 24.8581 6.97587 25 7.34213 25C7.70838 25 8.05188 24.8581 8.30919 24.6006L19.4449 13.4653C19.7028 13.207 19.8445 12.8621 19.8437 12.4954C19.8445 12.1273 19.7028 11.7826 19.4449 11.5245Z" fill="#4B4B4B"/>
+              </svg>
+            </div>
+          </div>
+          </a>
+          <div class="asset-vote-panel">
+              <form method="POST" action="{% url 'vote' %}" value={{asset.id}}>
+                  {% csrf_token %}
+                  {{ form }}
+                  <input type="hidden" name="itemID" value={{asset.id}} />
+                  <input type="radio" class="radio" name="btn" value="0" onClick="{% url 'vote' %}"
+                  {% if asset.check == 0 %} checked {% endif %}
+                  >
+                  <label for="0">Fordel</label>
+                  <input type="radio" class="radio" name="btn" value="1" onClick="{% url 'vote' %}"
+                  {% if asset.check == 1 %} checked {% endif %}
+                  >
+                  <label for="1">Doner</label>
+                  <input type="radio" class="radio" name="btn" value="2"
+                  {% if asset.check == 2 %} checked {% endif %}
+                  >
+                  <label for="2">Kast</label>
+                  <button type="submit" value="{{ asset.id }}" action="{% url 'vote' %}"> Stem </button>
 
-            </form>
+              </form>
 
+          </div>
         </div>
-
     </div>
 
 
