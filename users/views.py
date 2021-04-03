@@ -34,32 +34,6 @@ def checkAlert(user, estate):
     return check
 
 
-'''
-@login_required  # Krever at man må være logget inn for å aksessere siden
-def profile(request):
-    current_user = request.user
-    participate_list = list(Participate.objects.filter(username=current_user))
-    estates = []
-    messages1 = []
-    for participate in participate_list:
-        estate = participate.estateID
-        if checkAlert(current_user, estate):
-            messages1.append(f'Du må fulføre oppgjøret for: {estate.name}')
-        part_memb_list = list(Participate.objects.filter(estateID=estate))
-        estate_members = []
-        for par in part_memb_list:
-            estate_members.append(par.username)
-        estates.append([estate, estate_members])
-    context = {
-        # gjenstand funker som nøkkel til kodeblokken i home.html
-        'estates': estates,
-        'me': messages1
-
-    }
-    return render(request, 'users/profile.html', context)
-'''
-
-
 class ProfileListView(ListView):
     template_name = 'users/profile.html'
     model = Estate
