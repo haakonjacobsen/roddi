@@ -30,7 +30,6 @@
     padding: 7px;
     display: flex;
     justify-content: space-between;
-    flex: 1;
   }
   .asset-header-title {
     font-size: 2em;
@@ -77,6 +76,7 @@
     transition: 0.3s;
     position: relative;
     border-bottom: solid 1px #c7c7c7;
+    height: 80px;
   }
   .asset-messages:hover{
     background-color: #E9E9E9;
