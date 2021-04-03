@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView
-from .forms import UserRegisterForm, VoteForm, CommentForm
+from .forms import UserRegisterForm, VoteForm
 from dodsbo.models import Item, Estate, Participate, Wish, Favorite, Alert, Comment
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView

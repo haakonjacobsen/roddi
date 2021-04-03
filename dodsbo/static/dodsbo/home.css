@@ -1,0 +1,38 @@
+/* Home */
+.home-content{
+    background: url(/static/background.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    filter: blur(10px);
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .home-title{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 60px;
+    transform: translate(-50%,-50%);
+    font-family: "Josefin Slab";
+    text-align: center;
+  }
+  .home-description{
+    position: absolute;
+    left: 50%;
+    top: 75%;
+    transform: translate(-50%,-50%);
+    font-size: 30px;
+    font-family: "Josefin Slab";
+    text-align: center;
+    width: 900px;
+  }
+  .home-content img{
+    filter: grayscale(100%);
+    filter: blur(8px);
+    background-size: cover;
+  }

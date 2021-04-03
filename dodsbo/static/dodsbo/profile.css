@@ -1,0 +1,104 @@
+/* Profile */
+.profile-content {
+    position: relative;
+    display: flex;
+    z-index: 0;
+    height: 100%;
+  }
+  .profile-info-bar {
+    position: relative;
+    flex: 1;
+    background-color: #efefef;
+    width: fit-content;
+    z-index: 900;
+    -webkit-box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+    height: 100%;
+  }
+  .profile-userinfo {
+    padding: 0px 15px 0px 15px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    border-bottom: solid 1px #c7c7c7;
+    vertical-align: baseline;
+  }
+  .profile-userinfo h2 {
+    height: fit-content;
+    text-align: center;
+    font-weight: 400;
+  }
+  .estate-list{
+    z-index: 800;
+    flex: 3;
+    height: 100%;
+    overflow-y: auto;
+  }
+  .estate-list-header{
+    padding: 20px 0px 0px 20px;
+  }
+  .estate{
+    background-color: #FCF8E8;
+    margin: 20px;
+    max-width: 750px;
+    min-width: 100px;
+    padding: 20px;
+    border-radius: 8px;
+    -webkit-box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+    height: 350px;
+  }
+  .estate-list a:link{
+    text-decoration: none;
+    color: black;
+  }
+  .estate:hover{
+    -webkit-box-shadow: 0px 0px 20px 6px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.25);
+    background-color:#f5eed1 ;
+    cursor: pointer;
+  }
+  .estate-header{
+    height: 50px;
+  }
+  .estate-members{
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid black;
+  }
+  .estate-members-container{
+    display: flex;
+  }
+  .estate-member{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 25px;
+  }
+  
+  .estate-member-name{
+    font-size: 1em;
+    font-weight: 200;
+    text-align: center;
+  }
+  .estate-members-title{
+    margin-bottom: 10px;
+  }
+  .profile-estate-list {
+    z-index: 800;
+    flex: 3;
+    overflow-y: auto;
+  }
+  .profile-admin {
+    background-color: #DF7861;
+    font-size: large;
+    padding: 5px;
+    border-radius: 6px;
+    color: rgb(0, 0, 0);
+  }
+  .profile-admin:hover {
+    -webkit-box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+  }

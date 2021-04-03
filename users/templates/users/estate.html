@@ -58,12 +58,13 @@
               <form method="POST" action="{% url 'vote' %}" value={{asset.id}}>
                   {% csrf_token %}
                   {{ form }}
+                  <h6>{{ asset.check }}</h6>
                   <input type="hidden" name="itemID" value={{asset.id}} />
-                  <input type="radio" class="radio" name="btn" value="0" onClick="{% url 'vote' %}"
+                  <input type="radio" class="radio" name="btn" value="0"
                   {% if asset.check == 0 %} checked {% endif %}
                   >
                   <label for="0">Fordel</label>
-                  <input type="radio" class="radio" name="btn" value="1" onClick="{% url 'vote' %}"
+                  <input type="radio" class="radio" name="btn" value="1"
                   {% if asset.check == 1 %} checked {% endif %}
                   >
                   <label for="1">Doner</label>
