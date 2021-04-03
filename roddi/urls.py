@@ -30,7 +30,6 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('admin/', admin.site.urls),
     path('', include('dodsbo.urls')),
-    path('items/', include('users.urls', namespace='items')),
     path('items/<int:pk>/comments/', user_views.comment, name='comments'),
     path('items/<int:pk>/comments/add_comment/',
          user_views.AddCommentView.as_view(), name='add_comment'),

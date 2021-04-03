@@ -28,6 +28,8 @@ a:active {
 .main-content{
   width: 100vw;
   height: calc(100vh - 120px);
+  position: relative;
+  overflow-y: scroll;
 }
 /* Home */
 .home-content{
@@ -266,6 +268,10 @@ a:active {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
   height: 350px;
 }
+.estate-list a:link{
+  text-decoration: none;
+  color: black;
+}
 .estate:hover{
   -webkit-box-shadow: 0px 0px 20px 6px rgba(0, 0, 0, 0.25);
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.25);
@@ -308,11 +314,57 @@ a:active {
   -webkit-box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.25);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
 }
-.container{
-max-width: 500px;
-margin-top: 50px;
+/* Comments */
+.comments-container{
+  height:fit-content;
+  padding: 20px;
+  max-width: 900px;
+  margin-bottom: 100px;
+  color: #4b4b4b;
 }
+.comment{
+  background-color: #F5FBFF;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+  width: 500px;
+  height: auto;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  max-width: calc(100vw - 50px);
+}
+.comment-info{
+  border-bottom: 2px solid rgb(233, 233, 233);
+  margin-bottom: 10px;
+}
+.comment-author{
+  margin-bottom: 2px;
+}
+.comment-time{
+  font-weight: 200;
+}
+.comment-text{
+
+}
+.add-comment-btn{
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  fill: #F5FBFF;
+  transition: 0.3s;
+}
+.add-comment-btn:hover{
+  transition: 0.3s;
+  fill: #DAF0FE;
+}
+
+
 /*Bootstrap override*/
+.container{
+  max-width: 500px;
+  margin-top: 50px;
+}
 .content-section{
   background-color: white;
   padding: 20px;
