@@ -1,32 +1,61 @@
 {% extends "dodsbo/base.html" %}
 
 {% block content %}
-    <h1> Infosiden til Røddi</h1>
-    <p class="text">Denne nettsiden, Røddi, hjelper etterlatte familier med å fordele dødsbo. I hvert dødsbo vises alle gjenstandene som skal fordeles. De etterlatte kan velge om de ønsker at en gjenstand skal kastes, doneres eller beholdes. I tillegg har de muligheten til å markere de gjenstandene de har mest lyst på ved å trykke på «en knapp». For at familien enklere skal fordele gjenstandene mellom seg, kan de legge inn kommentarer på gjenstandene . </p>
-    &nbsp;&nbsp;
-    <h3 class="text">Opprette dødsbo</h3>
-    <p class="text">For å opprette et dødsbo må du trykke på admin-linken for å komme til django administration. Der trykker du på «add estate», setter navn på dødsboet og trykker på «save». </p>
-    &nbsp;&nbsp;
-    <h3 class="text">Opprette eiendel</h3>
-    <p class="text">For å opprette en eiendel, så må du først være inne i django administration siden. Her trykker du på «add item» og legger inn informasjon om hvilket dødsbo det skal tilhøre.</p>
-    &nbsp;&nbsp;
-    <h3 class="text">Invitere brukere til et dødsbo</h3>
-    <p class="text">For å legge inn brukere i et dødsbo, så trykker man på «participates» og så «add participates». Der velger du hvilket dødsbo og hvilken bruker du vil legge til i det dødsboet. For å legge til flere, må man gjenta operasjonen flere ganger.</p>
-    &nbsp;&nbsp;
-    <h3 class="text">Slette brukere fra et dødsbo</h3>
-    <p class="text">For å slette en bruker fra et dødsbo, så må du trykke på «participates». Der får du opp en liste med alle deltakere til ulike dødsbo. Finn riktig kobling, og trykk på søppelkassen for å slette.</p>
-    &nbsp;&nbsp;
-    <h3 class="text">Administrere kommentarer</h3>
-    <p class="text">Kommenterer på gjenstander kan redigeres og slettes ved å trykke inn på comments i django administration siden.</p>
-    &nbsp;&nbsp;
-    <h3 class="text">Gi varsel om å fullføre oppgjøret</h3>
-    <p class="text">Opprettes i django administration siden ved å trykke på alerts. Der kan man velge hvilken bruker som skal få varselet, og hvilket dødsbo vedkommende må fullføre.</p>
-    &nbsp;&nbsp;
-    <h3 class="text">Statistikk</h3>
-    <p class="text">Antall bruker på Røddi: {{stats.0}} </p>
-    <p class="text">Antall dødsbo på Røddi: {{stats.1}} </p>
-    <p class="text">Antall gjenstander på Røddi: {{stats.2}} </p>
-    <p class="text">Antall fullførte dødsbo på Røddi: {{stats.3}} </p>
-
+<div class="info-container">
+    <h1 class="info-title"> Infosiden til Røddi</h1>
+    <p class="text">Denne nettsiden, Røddi, hjelper etterlatte familier med å fordele dødsbo. I hvert dødsbo vises alle
+        gjenstandene som skal fordeles. De etterlatte kan velge om de ønsker at en gjenstand skal kastes, doneres eller
+        beholdes. I tillegg har de muligheten til å markere de gjenstandene de har mest lyst på ved å trykke på «en
+        knapp». For at familien enklere skal fordele gjenstandene mellom seg, kan de legge inn kommentarer på
+        gjenstandene.</p>
+    <div class="info-box">
+        <h3 class="info-title">Opprette dødsbo</h3>
+        <p class="text">For å opprette et dødsbo må du trykke på admin-linken for å komme til django administration. Der
+            trykker du på «add estate», setter navn på dødsboet og trykker på «save». </p>
+    </div>
+    <div class="info-box">
+        <h3 class="info-title">Opprette dødsbo</h3>
+        <p class="text">For å opprette et dødsbo må du trykke på admin-linken for å komme til django administration. Der
+            trykker du på «add estate», setter navn på dødsboet og trykker på «save». </p>
+    </div>
+    <div class="info-box">
+        <h3 class="info-title">Opprette eiendel</h3>
+        <p class="text">For å opprette en eiendel, så må du først være inne i django administration siden. Her trykker
+            du på
+            «add item» og legger inn informasjon om hvilket dødsbo det skal tilhøre.</p>
+    </div>
+    <div class="info-box">
+        <h3 class="info-title">Invitere brukere til et dødsbo</h3>
+        <p class="text">For å legge inn brukere i et dødsbo, så trykker man på «participates» og så «add participates».
+            Der
+            velger du hvilket dødsbo og hvilken bruker du vil legge til i det dødsboet. For å legge til flere, må man
+            gjenta
+            operasjonen flere ganger.</p>
+    </div>
+    <div class="info-box">
+        <h3 class="info-title">Slette brukere fra et dødsbo</h3>
+        <p class="text">For å slette en bruker fra et dødsbo, så må du trykke på «participates». Der får du opp en liste
+            med
+            alle deltakere til ulike dødsbo. Finn riktig kobling, og trykk på søppelkassen for å slette.</p>
+    </div>
+    <div class="info-box">
+        <h3 class="info-title">Administrere kommentarer</h3>
+        <p class="info-text">Kommenterer på gjenstander kan redigeres og slettes ved å trykke inn på comments i django
+            administration siden.</p>
+    </div>
+    <div class="info-box">
+        <h3 class="info-title">Gi varsel om å fullføre oppgjøret</h3>
+        <p class="info-text">Opprettes i django administration siden ved å trykke på alerts. Der kan man velge hvilken
+            bruker som
+            skal få varselet, og hvilket dødsbo vedkommende må fullføre.</p>
+    </div>
+    <div class="statistic-box">
+        <h3 class="text">Statistikk</h3>
+        <p class="text">Antall bruker på Røddi: {{stats.0}} </p>
+        <p class="text">Antall dødsbo på Røddi: {{stats.1}} </p>
+        <p class="text">Antall gjenstander på Røddi: {{stats.2}} </p>
+        <p class="text">Antall fullførte dødsbo på Røddi: {{stats.3}} </p>
+    </div>
+</div>
 
 {% endblock content %}

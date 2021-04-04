@@ -124,7 +124,7 @@ def items(request):
 
 
 @login_required
-def vote(request):
+def new_vote(request):
     form = VoteForm(request.POST or None)
     if request.method == "POST":
         form = VoteForm(request.POST)
@@ -138,20 +138,13 @@ def vote(request):
             if item.id == post_itemID:
                 clicked_item = item
         choice = request.POST.get('btn')
-        print("choice: " + choice)
-
         wish, created = Wish.objects.get_or_create(
             itemID_id=post_itemID, username=current_user)
         wish.choice = choice
         wish.full_clean(exclude=None, validate_unique=True)
         wish.save()
-
     else:
         form = VoteForm()
-
-    # context = {
-     #   'assets': load_items(request)
-    # }
 
     return HttpResponseRedirect("/estate/{id}/".format(id=estate_id))
 
