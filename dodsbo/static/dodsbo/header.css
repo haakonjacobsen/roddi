@@ -44,6 +44,9 @@
     top: 0%;
     transform: translate(0, 50%);
   }
+  #profile-icon svg{
+    transition: 0.3s;
+  }
   #profile-icon:hover svg {
     fill: #fcf8e8;
     cursor: pointer;
