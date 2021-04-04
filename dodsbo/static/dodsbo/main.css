@@ -34,7 +34,6 @@ a:active {
 .blank-form{
   background-color: none;
 }
-
 /*Bootstrap override*/
 .container{
   max-width: 500px;
