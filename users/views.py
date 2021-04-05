@@ -68,7 +68,7 @@ class ProfileListView(ListView):
                 if (len(members)>0 and len(items_in_estate)>0):
                     percentage_done = int(sum_votes/len(members)/len(items_in_estate)*100)
                 else:
-                    percentage_done = "100"
+                    percentage_done = "0"
                 estates.append([estate, members_stat,len(items_in_estate), percentage_done])
             context['estates'] = estates
             return context
