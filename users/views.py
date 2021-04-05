@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView
 from .forms import UserRegisterForm, VoteForm
@@ -8,6 +9,7 @@ from dodsbo.models import Item, Estate, Participate, Wish, Favorite, Alert, Comm
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView
 from django.http import HttpResponseRedirect
+
 
 
 def register(request):
@@ -45,18 +47,48 @@ class ProfileListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         current_user = self.request.user
-        participate_list = list(
-            Participate.objects.filter(username=current_user))
-        estates = []
-        for participate in participate_list:
-            estate = participate.estateID
-            part_memb_list = list(Participate.objects.filter(estateID=estate))
-            estate_members = []
-            for par in part_memb_list:
-                estate_members.append(par.username)
-            estates.append([estate, estate_members])
+        # returnerer alt for admin siden
+        if current_user.is_staff:
+            #estate_info = [[Estate.object, [[User, percentage],[User, percentage]]],[Estate.object, [User, percentage]]]
+            estate_stats = []
+            all_estates = Estate.objects.all()
+            User = get_user_model()
+            estates = []
+            for estate in all_estates:
+                #get members
+                participate = Participate.objects.filter(estateID=estate).values_list('username', flat=True)
+                members = User.objects.filter(pk__in=participate)
+                #get item stats
+                items_in_estate = Item.objects.filter(estateID=estate).values_list('pk', flat=True)
+                wishes_in_estate = Wish.objects.filter(itemID__in=items_in_estate)
+                members_stat = []
+                sum_votes = 0
+                for member in members:
+                    member_votes = wishes_in_estate.filter(username=member).count()
+                    members_stat.append([member, member_votes])
+                    sum_votes += member_votes
+                if (len(members)>0 and len(items_in_estate)>0):
+                    percentage_done = int(sum_votes/len(members)/len(items_in_estate)*100)
+                else:
+                    percentage_done = "100"
+                estates.append([estate, members_stat,len(items_in_estate), percentage_done])
+            context['estates'] = estates
+            return context
+        # returnerer alt for bruker siden
+        else:
+            participate_list = list(
+                Participate.objects.filter(username=current_user))
+            estates = []
+            for participate in participate_list:
+                estate = participate.estateID
+                part_memb_list = list(Participate.objects.filter(estateID=estate))
+                estate_members = []
+                for par in part_memb_list:
+                    estate_members.append(par.username)
+                estates.append([estate, estate_members])
 
-        context['estates'] = estates
+            context['estates'] = estates
+            context['me'] = Alert.objects.filter(user=current_user)
         return context
 
 
