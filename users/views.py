@@ -4,11 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView
-from .forms import UserRegisterForm, VoteForm
+from .forms import UserRegisterForm, VoteForm, AlertForm
 from dodsbo.models import Item, Estate, Participate, Wish, Favorite, Alert, Comment
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView
 from django.http import HttpResponseRedirect
+from dodsbo.models import Alert
 
 
 
@@ -49,16 +50,13 @@ class ProfileListView(ListView):
         current_user = self.request.user
         # returnerer alt for admin siden
         if current_user.is_staff:
-            #estate_info = [[Estate.object, [[User, percentage],[User, percentage]]],[Estate.object, [User, percentage]]]
             estate_stats = []
             all_estates = Estate.objects.all()
             User = get_user_model()
             estates = []
             for estate in all_estates:
-                #get members
                 participate = Participate.objects.filter(estateID=estate).values_list('username', flat=True)
                 members = User.objects.filter(pk__in=participate)
-                #get item stats
                 items_in_estate = Item.objects.filter(estateID=estate).values_list('pk', flat=True)
                 wishes_in_estate = Wish.objects.filter(itemID__in=items_in_estate)
                 members_stat = []
@@ -180,6 +178,22 @@ def new_vote(request):
 
     return HttpResponseRedirect("/estate/{id}/".format(id=estate_id))
 
+@login_required
+def new_alert(request):
+    form = AlertForm(request.POST or None)
+    if request.method == "POST":
+        estate_id = request.POST.get('estateID')
+        estate = Estate.objects.filter(id=estate_id).first()
+        username = request.POST.get('alert-btn')
+        User = get_user_model()
+        user = User.objects.filter(username=username).first()
+        alert, created = Alert.objects.get_or_create(estateID=estate, user=user)
+        alert.full_clean(exclude=None, validate_unique=True)
+        alert.save()
+    else:
+        form = VoteForm()
+
+    return HttpResponseRedirect("/profile/")
 
 def favorite_item(request):
     user = request.user

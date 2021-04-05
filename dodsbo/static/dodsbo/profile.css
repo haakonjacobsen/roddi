@@ -83,7 +83,17 @@
   display: flex;
   flex-wrap: wrap;
 }
-.estate-user-stat{
+.estate-user-stats-list button, input[type="submit"]{
+  align-self: center;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+.estate-user{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,8 +104,33 @@
   border-radius: 8px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
 }
+.estate-user-unfinished{
+  background-color: #fff79e;
+}
 .estate-user-stat-finished{
   background-color: #D4E2D4;
+}
+.estate-user-unfinished #alert-text, #alert-icon{
+  display: none;
+}
+.estate-user-unfinished:hover #username-text{
+  display: none;
+}
+.estate-user-unfinished:hover #alert-text{
+  display:block;
+}
+.estate-user-unfinished:hover #alert-icon{
+  display: block;
+}
+.estate-user-unfinished:hover #user-icon{
+  display: none;
+}
+.estate-user-unfinished:hover #count-text{
+  visibility: hidden;
+}
+.estate-user-unfinished:hover {
+  background-color: #faaba3;
+  transition: 0.3s;
 }
 .estate{
   background-color: #FCF8E8;
