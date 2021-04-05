@@ -10,7 +10,8 @@ class UserRegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name',
+                  'email', 'password1', 'password2']
 
 
 class VoteForm(forms.Form):
@@ -25,14 +26,3 @@ class VoteForm(forms.Form):
     class Meta:
         model = Wish
         fields = ['choices']
-
-
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        fields = ('body', 'name')
-
-        widgets = {
-            'body': forms.Textarea(attrs={'class': 'form-control'}),
-
-        }

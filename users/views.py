@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView
-from .forms import UserRegisterForm, VoteForm, CommentForm
+from .forms import UserRegisterForm, VoteForm
 from dodsbo.models import Item, Estate, Participate, Wish, Favorite, Alert, Comment
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView
@@ -32,32 +32,6 @@ def checkAlert(user, estate):
         if alert.estateID == estate and alert.user == user:
             check = True
     return check
-
-
-'''
-@login_required  # Krever at man må være logget inn for å aksessere siden
-def profile(request):
-    current_user = request.user
-    participate_list = list(Participate.objects.filter(username=current_user))
-    estates = []
-    messages1 = []
-    for participate in participate_list:
-        estate = participate.estateID
-        if checkAlert(current_user, estate):
-            messages1.append(f'Du må fulføre oppgjøret for: {estate.name}')
-        part_memb_list = list(Participate.objects.filter(estateID=estate))
-        estate_members = []
-        for par in part_memb_list:
-            estate_members.append(par.username)
-        estates.append([estate, estate_members])
-    context = {
-        # gjenstand funker som nøkkel til kodeblokken i home.html
-        'estates': estates,
-        'me': messages1
-
-    }
-    return render(request, 'users/profile.html', context)
-'''
 
 
 class ProfileListView(ListView):
@@ -150,7 +124,7 @@ def items(request):
 
 
 @login_required
-def vote(request):
+def new_vote(request):
     form = VoteForm(request.POST or None)
     if request.method == "POST":
         form = VoteForm(request.POST)
@@ -164,20 +138,13 @@ def vote(request):
             if item.id == post_itemID:
                 clicked_item = item
         choice = request.POST.get('btn')
-        print("choice: " + choice)
-
         wish, created = Wish.objects.get_or_create(
             itemID_id=post_itemID, username=current_user)
         wish.choice = choice
         wish.full_clean(exclude=None, validate_unique=True)
         wish.save()
-
     else:
         form = VoteForm()
-
-    # context = {
-     #   'assets': load_items(request)
-    # }
 
     return HttpResponseRedirect("/estate/{id}/".format(id=estate_id))
 
@@ -225,11 +192,13 @@ def comment(request, pk):
 
 class AddCommentView(CreateView):
     model = Comment
-    form_class = CommentForm
-    template_name = 'users/add_comment.html'
+    fields = ['body']
+    template_name = 'users/comment_form.html'
 
     def form_valid(self, form):
         form.instance.itemID_id = self.kwargs['pk']
+        form.instance.name = self.request.user
         return super().form_valid(form)
 
-    success_url = reverse_lazy('items')
+    def get_success_url(self):
+        return reverse('comments', kwargs={'pk': self.kwargs['pk']})

@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from users import views as user_views
-from users.views import ProfileListView, EstateDetailView
+from users.views import ProfileListView, EstateDetailView, AddCommentView
 
 
 urlpatterns = [
@@ -25,14 +25,12 @@ urlpatterns = [
     path('profile/', ProfileListView.as_view(), name='profile'),
     path('estate/<int:pk>/', EstateDetailView.as_view(), name='estate-detail'),
     path('items/', user_views.items, name='items'),
-    path('voted/', user_views.vote, name='vote'),
+    path('new-voted/', user_views.new_vote, name='new-vote'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('admin/', admin.site.urls),
     path('', include('dodsbo.urls')),
-    path('items/', include('users.urls', namespace='items')),
     path('items/<int:pk>/comments/', user_views.comment, name='comments'),
     path('items/<int:pk>/comments/add_comment/',
-         user_views.AddCommentView.as_view(), name='add_comment')
-
+         user_views.AddCommentView.as_view(), name='add_comment'),
 ]

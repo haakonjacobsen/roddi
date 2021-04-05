@@ -1,21 +1,52 @@
 {% extends "dodsbo/base.html" %}
 {% block content %}
-   <h1>{{ name }}</h1>
-   {% if comments|length == 0  %}
-       <h2>Ingen kommentarer å vise</h2>
+<div class="comments-container">
+    <h1>{{ name }}</h1>
+    {% if comments|length == 0 %}
+    <h2>Ingen kommentarer å vise</h2>
     {% else %}
-       <h2>Kommentarer</h2>
-        {% for c in comments %}
-            <strong>
-            {{ c.name }} -
-            {{ c.date_added }}
-            </strong>
-            <br/>
-            {{ c.body }}
-            <br/>
-            <hr>
-        {% endfor %}
+    <h2 class="comments-title">Kommentarer</h2>
+    {% for comment in comments %}
+    <div class="comment">
+        <div class="comment-info">
+            <h4 class="comment-author">{{ comment.name }}</h4>
+            <h6 class="comment-time">{{ comment.date_added }}</h6>
+        </div>
+        <div class="comment-text">{{ comment.body }}</div>
+    </div>
+    {% endfor %}
     {% endif %}
-    <br/>
-    <a href="add_comment">Legg til kommentar</a>
+    <a href="add_comment">
+        <svg class="add-comment-btn" width="146" height="146" viewBox="0 0 146 146" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_d)">
+                <circle class="add-comment-btn" cx="73" cy="71" r="63" />
+            </g>
+            <g clip-path="url(#clip0)">
+                <path
+                    d="M102.607 79.9736C101.644 79.9736 100.864 80.754 100.864 81.7169V97.1961C100.86 100.084 98.5212 102.423 95.6338 102.426H46.7168C43.8294 102.423 41.4901 100.084 41.4867 97.1961V51.7658C41.4901 48.8791 43.8294 46.5391 46.7168 46.5357H62.196C63.1589 46.5357 63.9393 45.7553 63.9393 44.7924C63.9393 43.8301 63.1589 43.049 62.196 43.049H46.7168C41.9049 43.0545 38.0054 46.9539 38 51.7658V97.1968C38.0054 102.009 41.9049 105.908 46.7168 105.914H95.6338C100.446 105.908 104.345 102.009 104.351 97.1968V81.7169C104.351 80.754 103.57 79.9736 102.607 79.9736V79.9736Z"
+                    fill="#4B4B4B" />
+                <path
+                    d="M103.66 38.5632C100.596 35.4994 95.629 35.4994 92.5651 38.5632L61.4625 69.6659C61.2493 69.8791 61.0954 70.1433 61.015 70.4334L56.9249 85.1996C56.7567 85.805 56.9277 86.4533 57.3717 86.898C57.8164 87.342 58.4647 87.5129 59.0701 87.3454L73.8362 83.2546C74.1263 83.1743 74.3906 83.0204 74.6037 82.8072L105.706 51.7038C108.765 48.638 108.765 43.6748 105.706 40.609L103.66 38.5632ZM65.2611 70.7991L90.7162 45.3433L98.9257 53.5528L73.4699 79.0086L65.2611 70.7991ZM63.6212 74.0897L70.1799 80.6491L61.1077 83.1627L63.6212 74.0897ZM103.24 49.2386L101.392 51.0875L93.1814 42.8774L95.031 41.0285C96.7329 39.3267 99.4923 39.3267 101.194 41.0285L103.24 43.0742C104.94 44.7781 104.94 47.5354 103.24 49.2386V49.2386Z"
+                    fill="#4B4B4B" />
+            </g>
+            <defs>
+                <filter id="filter0_d" x="0" y="0" width="146" height="146" filterUnits="userSpaceOnUse"
+                    color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                    <feOffset dy="2" />
+                    <feGaussianBlur stdDeviation="5" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                </filter>
+                <clipPath id="clip0">
+                    <rect width="70" height="70" fill="white" transform="translate(38 36)" />
+                </clipPath>
+            </defs>
+        </svg>
+
+    </a>
+</div>
 {% endblock %}
