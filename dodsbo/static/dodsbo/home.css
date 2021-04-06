@@ -1,38 +1,66 @@
 /* Home */
 .home-content{
-    background: url(/static/background.jpg) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    filter: blur(10px);
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-  
-  .home-title{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    font-size: 60px;
-    transform: translate(-50%,-50%);
-    font-family: "Josefin Slab";
-    text-align: center;
-  }
-  .home-description{
-    position: absolute;
-    left: 50%;
-    top: 75%;
-    transform: translate(-50%,-50%);
-    font-size: 30px;
-    font-family: "Josefin Slab";
-    text-align: center;
-    width: 900px;
-  }
-  .home-content img{
-    filter: grayscale(100%);
-    filter: blur(8px);
-    background-size: cover;
-  }
+  background: url(/static/background.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  filter: blur(10px);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.home-content img{
+  filter: grayscale(100%);
+  filter: blur(8px);
+  background-size: cover;
+}
+.home-info{
+  background-color: rgba(251, 244, 232, 0.527);
+  -webkit-box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 30px;
+  font-family: "Josefin Slab";
+  text-align: center;
+  max-width: 700px;
+  width: 90%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.home-info a:link{
+  text-decoration: none;
+  color: black;
+  font-family: "Josefin Slab";
+}
+.home-info a:visited{
+  text-decoration: none;
+  font-family: "Josefin Slab";
+}
+.home-title{
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+.home-description{
+  text-align: left;
+  font-size: large;
+}
+.action-buttons{
+  display: flex;
+}
+.home-action{
+  flex: 1;
+}
+.home-action a{
+  width: 100%;
+  height: 100%;
+}
+#login{
+  border-right: solid 1px #4B4B4B;
+}

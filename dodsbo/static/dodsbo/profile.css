@@ -1,10 +1,10 @@
 /* Profile */
 .profile-content {
-    position: relative;
-    display: flex;
-    z-index: 0;
-    height: 100%;
-  }
+  position: relative;
+  display: flex;
+  z-index: 0;
+  height: 100%;
+}
 .profile-content a:link{
   text-decoration: none;
   color: black;
@@ -62,13 +62,79 @@
   flex: 3;
   height: 100%;
   overflow-y: auto;
+  padding: 20px;
 }
 .estate-list-header{
-  padding: 20px 0px 0px 20px;
+  margin-bottom: 20px;
+}
+.estate-admin{
+  background-color: #FCF8E8;
+  margin-bottom: 20px;
+  max-width: 750px;
+  min-width: 100px;
+  padding: 20px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+  transition: 0.3s;
+}
+.estate-user-stats-list{
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.estate-user-stats-list button, input[type="submit"]{
+  align-self: center;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+.estate-user{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px;
+  margin-right: 20px;
+  min-width: 160px;
+  background-color: #fff79e;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+}
+.estate-user-unfinished{
+  background-color: #fff79e;
+}
+.estate-user-stat-finished{
+  background-color: #D4E2D4;
+}
+.estate-user-unfinished #alert-text, #alert-icon{
+  display: none;
+}
+.estate-user-unfinished:hover #username-text{
+  display: none;
+}
+.estate-user-unfinished:hover #alert-text{
+  display:block;
+}
+.estate-user-unfinished:hover #alert-icon{
+  display: block;
+}
+.estate-user-unfinished:hover #user-icon{
+  display: none;
+}
+.estate-user-unfinished:hover #count-text{
+  visibility: hidden;
+}
+.estate-user-unfinished:hover {
+  background-color: #faaba3;
+  transition: 0.3s;
 }
 .estate{
   background-color: #FCF8E8;
-  margin: 20px;
+  margin-bottom: 20px;
   max-width: 750px;
   min-width: 100px;
   padding: 20px;
@@ -87,12 +153,13 @@
 }
 .estate-header{
   height: 50px;
+  border-bottom: solid 1px #4B4B4B;
+  margin-bottom: 20px;
 }
 .estate-members{
   padding-top: 10px;
   display: flex;
   flex-direction: column;
-  border-top: 1px solid black;
 }
 .estate-members-container{
   display: flex;
@@ -112,8 +179,38 @@
 .estate-members-title{
   margin-bottom: 10px;
 }
-.profile-estate-list {
-  z-index: 800;
-  flex: 3;
-  overflow-y: auto;
+.alert-estate{
+  height: 70px;
+  background-color: #FEE3E0;
+  display: flex;
+  border-bottom: solid 2px #FF4230;
+  border-radius: 4px;
+  padding: 5px;
+  align-items: center;
+  margin-bottom: 15px;
+  max-width: 750px;
+  min-width: 100px;
+}
+.alert-estate svg{
+  margin-right: 15px;
+}
+.alert-text{
+  height: 100%;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.alert-text h4{
+  font-size: 20px;
+  flex: 2;
+  margin: 0;
+  font-weight: 600;
+}
+.alert-text h6{
+  font-size: 14px;
+  font-weight: 300;
+  flex: 1;
+  margin: 0;
 }

@@ -29,10 +29,12 @@
     font-weight: 400;
     color: #4b4b4b;
     margin: 0;
+    transition: 0.3s;
   }
   .header-nav-text:hover {
     color: #df7861;
     cursor: pointer;
+    transition: 0.3s;
   }
   .header-estate-nav {
     display: flex;
@@ -63,8 +65,10 @@
     top: 55%; /* Kompesere for at font size ikke strekker hele h1 */
     transform: translate(-50%,-50%);
     margin: 0;
+    transition: 0.3s;
   }
   #logo:hover {
     color: #df7861;
     cursor: pointer;
+    transition: 0.3s;
   }
