@@ -34,6 +34,9 @@ a:active {
 .blank-form{
   background-color: none;
 }
+.icon{
+  margin-right: 15px;
+}
 /*Bootstrap override*/
 .container{
   max-width: 500px;
