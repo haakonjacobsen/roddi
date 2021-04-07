@@ -99,6 +99,7 @@
   align-items: center;
   padding: 4px;
   margin-right: 20px;
+  margin-bottom: 20px;
   min-width: 160px;
   background-color: #fff79e;
   border-radius: 8px;
@@ -152,7 +153,7 @@
   transition: 0.3s;
 }
 .estate-header{
-  height: 50px;
+  height: fit-content;
   border-bottom: solid 1px #4B4B4B;
   margin-bottom: 20px;
 }

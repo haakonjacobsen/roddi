@@ -58,11 +58,10 @@ class ProfileListView(ListView):
                 participate = Participate.objects.filter(estateID=estate).values_list('username', flat=True)
                 members = User.objects.filter(pk__in=participate)
                 items_in_estate = Item.objects.filter(estateID=estate).values_list('pk', flat=True)
-                wishes_in_estate = Wish.objects.filter(itemID__in=items_in_estate)
                 members_stat = []
                 sum_votes = 0
                 for member in members:
-                    member_votes = wishes_in_estate.filter(username=member).count()
+                    member_votes = vote_count(estate, member)
                     members_stat.append([member, member_votes])
                     sum_votes += member_votes
                 if (len(members)>0 and len(items_in_estate)>0):
@@ -74,21 +73,42 @@ class ProfileListView(ListView):
             return context
         # returnerer alt for bruker siden
         else:
-            participate_list = list(
-                Participate.objects.filter(username=current_user))
+            participate_list = list(Participate.objects.filter(username=current_user))
+            user_alerts = list(Alert.objects.filter(user=current_user))
             estates = []
+            alerts = []
             for participate in participate_list:
                 estate = participate.estateID
+                # Fix alerts
+                for alert in user_alerts:
+                    if alert.estateID == estate:
+                        if not is_finished(estate, current_user):
+                            alerts.append(alert)
                 part_memb_list = list(Participate.objects.filter(estateID=estate))
                 estate_members = []
                 for par in part_memb_list:
                     estate_members.append(par.username)
                 estates.append([estate, estate_members])
-
             context['estates'] = estates
-            context['me'] = Alert.objects.filter(user=current_user)
+            context['me'] = alerts
         return context
 
+def vote_count(estate, user):
+    items_in_estate = Item.objects.filter(estateID=estate).values_list('pk', flat=True)
+    wishes_in_estate = Wish.objects.filter(itemID__in=items_in_estate)
+    return wishes_in_estate.filter(username=user).count()
+
+def estate_count(estate):
+    return Item.objects.filter(estateID=estate).count()
+
+def is_finished(estate, user):
+    estate_items = list(Item.objects.filter(estateID=estate))
+    wishes = []
+    for wish in Wish.objects.filter(username=user):
+        for item in estate_items:
+            if wish.itemID == item:
+                wishes.append(item)
+    return len(estate_items) == len(wishes)
 
 class EstateDetailView(DetailView):
     template_name = 'users/estate.html'
@@ -113,8 +133,13 @@ class EstateDetailView(DetailView):
                 choice, wish = checkWish(current_user, item)
                 item.check = choice
                 user_items.append(item)
-
+        user_votes = vote_count(self.object, current_user)
+        item_count = estate_count(self.object)
         context['assets'] = user_items
+        context['user_asset_count'] = user_votes
+        context['estate_asset_count'] = item_count
+        context['percent_finished'] = int(user_votes/item_count*100)
+        context['border_radius'] = "5px" if int(user_votes/item_count*100)==100 else "10px 0px 0px 10px"
         return context
 
 
