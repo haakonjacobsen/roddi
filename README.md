@@ -7,7 +7,7 @@ Denne nettsiden, Røddi, hjelper etterlatte familier med å fordele dødsbo. I h
 Opprett en database med navn roddi, gjennom workbench eller i terminal. 
 For workbench, skriv: CREATE DATABASE roddi;
 
-Bruk disse kommandoene i terminalen:
+Derretter bruker man disse kommandoene i terminalen:
 - **py -m pip install mysqlclient**
 - **py manage.py makemigrations**
 - **py manage.py migrate**
