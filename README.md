@@ -2,6 +2,14 @@
 
 Denne nettsiden, Røddi, hjelper etterlatte familier med å fordele dødsbo. I hvert dødsbo vises alle gjenstandene som skal fordeles. De etterlatte kan velge om de ønsker at en gjenstand skal kastes, doneres eller beholdes. I tillegg har de muligheten til å markere de gjenstandene de har mest lyst på ved å trykke på «en knapp». For at familien enklere skal fordele gjenstandene mellom seg, kan de legge inn kommentarer på gjenstandene.
 
+**Forsiden til nettsiden:**
+
+![roddi_1.png](roddi_1.png) 
+
+**Eksempel på et dødsbo med gjenstander:**
+
+![rodd_2.png](rodd_2.png) 
+
 ## Opprette databsen og connection til django:
 
 Opprett en database med navn roddi, gjennom workbench eller i terminal. 
